@@ -1,0 +1,50 @@
+'use client'
+
+import { useRef, ReactNode, useMemo, useEffect, useState } from "react";
+import { motion, useScroll, useTransform } from "motion/react";
+
+interface ScrollSectionProps {
+    children: ReactNode;
+    itemCount: number;
+}
+
+export default function HorizontalScroll({ children, itemCount }: ScrollSectionProps) {
+    const [mobile, setMobile] = useState(false);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setMobile(window.innerWidth < 768);
+        };
+        handleResize();
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+    const targetRef = useRef(null);
+    const { scrollYProgress } = useScroll({
+        target: targetRef,
+    });
+
+    const scrollRange = useMemo(() => {
+        const baseRange = 24;
+        const range = baseRange * (itemCount - 1);
+        return [`${mobile ? range - 7.5 : range - 12}%`, `-${mobile ? range : range - 12}%`];
+    }, [itemCount, mobile]);
+
+    const x = useTransform(scrollYProgress, [0, 1], scrollRange);
+
+    return (
+        
+        <div className="relative">
+            <div className="absolute top-0 left-0 h-full w-10 bg-gradient-to-r from-neutral-50 to-neutral-50/0 z-50"></div>
+            <section className="relative h-[300vh]" ref={targetRef}>
+                <div className="sticky top-0 flex h-screen justify-center items-center overflow-hidden snap-y snap-mandatory">
+                    <motion.div style={{ x }} className="flex gap-52 snap-x snap-mandatory">
+                        {children}
+                    </motion.div>
+                </div>
+            </section>
+            <div className="absolute top-0 right-0 h-full w-10 bg-gradient-to-l from-neutral-50 to-neutral-50/0 z-50"></div>
+        </div>
+    );
+};
