@@ -24,7 +24,7 @@ export default function Header() {
                 <li>
                     <Button variant="hello" asChild className="group">
                         <Link href="/contact">
-                            <span className="text-neutral-500 group-hover:text-neutral-700 dark:text-neutral-400 dark:group-hover:text-neutral-300 transition-all duration-300">Say `Hello`</span>
+                            <span className="text-neutral-200 group-hover:text-neutral-800 dark:text-neutral-400 dark:group-hover:text-neutral-300 transition-all duration-300">Say `Hello`</span>
                         </Link>
                     </Button>
                 </li>
