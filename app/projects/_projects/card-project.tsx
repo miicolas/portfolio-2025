@@ -31,25 +31,25 @@ export default function CardProject() {
                 
             >
                 <Card 
-                    className={`absolute top-0 left-0 w-fit h-fit rotate-6 transition-all duration-300 ease-in-out shadow-lg hover:shadow-xl group-hover:translate-x-4 group-hover:-translate-y-4 `}
+                    className={`absolute top-10 lg:top-0 -left-20 w-fit h-fit rotate-6 transition-all duration-300 ease-in-out shadow-lg hover:shadow-xl group-hover:translate-x-4 group-hover:-translate-y-4 `}
                 >
                     <Image 
                         src="https://nicolas-becharat.com/_next/image?url=%2Fimages%2Fprojects%2Flearn404.png&w=828&q=75"
                         alt="Project image 1" 
                         width={1080}
                         height={320}
-                        className="rounded-lg h-96 w-auto object-cover" 
+                        className="rounded-lg h-64 w-auto object-cover" 
                     />
                 </Card>
                 <Card 
-                    className={`absolute top-0 -right-20 w-fit h-fit -rotate-3 transition-all duration-300 ease-in-out shadow-lg hover:shadow-xl group-hover:-translate-x-4 group-hover:-translate-y-4`}
+                    className={`absolute top-0 -right-20 w-fit h-fit -rotate-3 transition-all duration-300 ease-in-out shadow-lg hover:shadow-xl group-hover:-translate-x-4 group-hover:-translate-y-4 hidden lg:block`}
                 >
                     <Image 
                         src="https://nicolas-becharat.com/_next/image?url=%2Fimages%2Fprojects%2Flearn404.png&w=828&q=75"
                         alt="Project image 2" 
-                        width={400}
+                        width={1080}
                         height={320}
-                        className="rounded-lg h-72 w-auto object-cover" 
+                        className="rounded-lg h-64 w-auto object-cover" 
                     />
                 </Card>
             </div>
