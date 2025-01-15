@@ -28,10 +28,12 @@ export default function HorizontalScroll({ children, itemCount }: ScrollSectionP
     const scrollRange = useMemo(() => {
         const baseRange = 24;
         const range = baseRange * (itemCount - 1);
-        return [`${mobile ? range - 7.5 : range - 12}%`, `-${mobile ? range : range - 12}%`];
+        return [`${mobile ? range - 7.5 : range - 12.5}%`, `-${mobile ? range-1 : range - 12.5}%`];
     }, [itemCount, mobile]);
 
     const x = useTransform(scrollYProgress, [0, 1], scrollRange);
+
+    
 
     return (
         
