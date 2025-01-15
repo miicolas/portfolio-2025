@@ -49,7 +49,7 @@ export default function ExperienceItem({ experience, index, isMobile } : Experie
                     }
                 }}
                 viewport={{ once: true }}
-                className={`absolute w-5 h-5 bg-white shadow-lg border-2 border-indigo-500 rounded-full z-20 
+                className={`absolute w-5 h-5 bg-neutral-100 shadow-lg border-2 border-indigo-500 rounded-full z-20 
                     ${isMobile ? 'left-8 -ml-2' : isLeft ? 'left-1/2 -translate-x-1/2 -ml-2' : 'right-1/2 translate-x-1/2 -mr-3'}
                     hover:scale-150 hover:bg-indigo-50 transition-all duration-300 ease-in-out 
                 `}
@@ -71,7 +71,7 @@ export default function ExperienceItem({ experience, index, isMobile } : Experie
                 viewport={{ once: true }}
             >
                 <motion.div
-                    className="group relative cursor-pointer rounded-xl border border-neutral-200 bg-white p-6 shadow-sm transition-all duration-300 ease-in-out hover:shadow-xl"
+                    className="group relative cursor-pointer rounded-xl border border-neutral-200 bg-neutral-100 p-6 shadow-sm transition-all duration-300 ease-in-out hover:shadow-xl"
                 >
                     <div className="flex flex-col space-y-3">
                         <div className="flex items-start justify-between">
