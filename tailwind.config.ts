@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
+import { withUt } from "uploadthing/tw";
 
-export default {
+export default withUt({
 	darkMode: ["class"],
 	content: [
 		"./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -57,31 +58,54 @@ export default {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			keyframes: {
-                letter: {
-                    '0%': { transform: 'translate(0, 0) rotate(0deg)' },
-                    '10%': { transform: 'translate(1px, -1px) rotate(1deg)' },
-                    '20%': { transform: 'translate(-1px, 1px) rotate(-1deg)' },
-                    '30%': { transform: 'translate(1px, 1px) rotate(1deg)' },
-                    '40%': { transform: 'translate(-1px, -1px) rotate(-1deg)' },
-                    '50%': { transform: 'translate(1px, -1px) rotate(1deg)' },
-                    '60%': { transform: 'translate(-1px, 1px) rotate(-1deg)' },
-                    '70%': { transform: 'translate(1px, 1px) rotate(1deg)' },
-                    '80%': { transform: 'translate(-1px, -1px) rotate(-1deg)' },
-                    '90%': { transform: 'translate(1px, -1px) rotate(1deg)' },
-                    '100%': { transform: 'translate(0, 0) rotate(0deg)' }
-                },
-                sphere: {
-                    '0%': { transform: 'translate(0, 0) rotate(0deg)' },
-                    '25%': { transform: 'translate(10px, -10px) rotate(1deg)' },
-                    '50%': { transform: 'translate(-10px, 20px) rotate(-1deg)' },
-                    '75%': { transform: 'translate(-20px, -10px) rotate(1deg)' },
-                    '100%': { transform: 'translate(0, 0) rotate(0deg)' }
-                },
-            },
-            animation: {
-                letter: 'letter 5s ease-in-out infinite',
-                sphere: 'sphere 5s ease-in-out infinite'
-            }
+				letter: {
+					'0%': { transform: 'translate(0, 0) rotate(0deg)' },
+					'10%': { transform: 'translate(1px, -1px) rotate(1deg)' },
+					'20%': { transform: 'translate(-1px, 1px) rotate(-1deg)' },
+					'30%': { transform: 'translate(1px, 1px) rotate(1deg)' },
+					'40%': { transform: 'translate(-1px, -1px) rotate(-1deg)' },
+					'50%': { transform: 'translate(1px, -1px) rotate(1deg)' },
+					'60%': { transform: 'translate(-1px, 1px) rotate(-1deg)' },
+					'70%': { transform: 'translate(1px, 1px) rotate(1deg)' },
+					'80%': { transform: 'translate(-1px, -1px) rotate(-1deg)' },
+					'90%': { transform: 'translate(1px, -1px) rotate(1deg)' },
+					'100%': { transform: 'translate(0, 0) rotate(0deg)' }
+				},
+				sphere: {
+					'0%': { transform: 'translate(0, 0) rotate(0deg)' },
+					'25%': { transform: 'translate(10px, -10px) rotate(1deg)' },
+					'50%': { transform: 'translate(-10px, 20px) rotate(-1deg)' },
+					'75%': { transform: 'translate(-20px, -10px) rotate(1deg)' },
+					'100%': { transform: 'translate(0, 0) rotate(0deg)' }
+				},
+				border: {
+					to: { '--border-angle': '360deg' },
+				}, 
+				skill_1: {
+					'0%': { transform: 'translate(0, 0) rotate(0deg)' },
+					'25%': { transform: 'translate(10px, 0) rotate(1deg)' },
+					'50%': { transform: 'translate(-10px, 0) rotate(-1deg)' },
+					'75%': { transform: 'translate(10px, 0) rotate(1deg)' },
+					'100%': { transform: 'translate(0, 0) rotate(0deg)' }
+				},
+				skill_2: {
+					'0%': { transform: 'translate(0, 0) rotate(0deg)' },
+					'25%': { transform: 'translate(0, 10px) rotate(1deg)' },
+					'50%': { transform: 'translate(0, -10px) rotate(-1deg)' },
+					'75%': { transform: 'translate(0, 10px) rotate(1deg)' },
+					'100%': { transform: 'translate(0, 0) rotate(0deg)' }
+				},
+			
+			},
+			animation: {
+				letter: 'letter 5s ease-in-out infinite',
+				sphere: 'sphere 5s ease-in-out infinite',
+				border: 'border 4s linear infinite',
+				skill_1: 'skill_1 2s ease-in-out infinite',
+				skill_2: 'skill_2 2s ease-in-out infinite',
+				
+
+			}
 		},
 		fontFamily: {
 			'bloop': ['"Dx Bloop"', 'sans-serif'],
@@ -90,4 +114,4 @@ export default {
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
-} satisfies Config;
+ }) satisfies Config;
