@@ -32,7 +32,7 @@ export default function MagneticButton({children}: {children: ReactNode}) {
             onMouseLeave={reset}
             animate={{ x, y }}
             transition={{ type: "spring", stiffness: 100, damping: 8, mass: 0.5 }}
-            className=' z-50 overflow-visible'
+            className=' z-50 overflow-visible cursor-grabbing'
         >
             {children}
         </motion.div>
