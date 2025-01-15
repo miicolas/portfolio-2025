@@ -31,7 +31,7 @@ export default function Time() {
                 <span>Paris - France</span>
             </div>
             <div className="font-mono">
-                <span>{time ?? "Loading..."}</span>
+                <span>{time}</span>
             </div>
         </div>
     )
