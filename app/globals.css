@@ -75,3 +75,13 @@ html {
     @apply bg-background text-foreground;
   }
 }
+
+@property --border-angle {
+  inherits: false;
+  initial-value: 0deg;
+  syntax: '<angle>';
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}
