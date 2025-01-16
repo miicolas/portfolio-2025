@@ -6,7 +6,7 @@ import { ReactNode } from 'react';
 export default function ScrollSmooth({ children }: { children: ReactNode }) {
 
   return (
-    <ReactLenis root options={{ duration: 2, smoothWheel: true }}>
+    <ReactLenis root options={{ duration: 1.2, smoothWheel: true }}>
     {children}
   </ReactLenis>
   )
