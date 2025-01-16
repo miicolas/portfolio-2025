@@ -4,6 +4,14 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ScrollSmooth from "@/components/layout/scroll-smooth";
 import { Toaster } from "@/components/ui/sonner"
+import localFont from 'next/font/local'
+ 
+
+const dx_Bloop = localFont({
+  src: './font/graffity-fill-webfont.woff2',
+  display: 'swap',
+  variable: '--font-dx-bloop',
+})
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,6 +22,29 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+const neueMontreal = localFont({
+  src: [
+    {
+      path: './font/neuemontreal-light-webfont.woff2',
+      weight: '300',
+      style: 'light',
+    },
+    {
+      path: './font/neuemontreal-medium-webfont.woff2',
+      weight: '500',
+      style: 'medium',
+    },
+    {
+      path: './font/neuemontreal-regular-webfont.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-neueMontreal',
+});
+
+
 
 export const metadata: Metadata = {
   title: "Nicolas Bechart - Portfolio",
@@ -27,15 +58,14 @@ export default function RootLayout({
 }>) {
 
   return (
-    <html lang="en">
-
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-neutral-50 text-neutral-900 dark:bg-neutral-900 dark:text-neutral-50 max-w-7xl m-auto p-4 w-full`}
+        className={`${geistSans.variable} ${geistMono.variable} ${dx_Bloop.variable} ${neueMontreal.className} antialiased bg-neutral-50 text-neutral-900 dark:bg-neutral-900 dark:text-neutral-50 p-4 w-full`}
       >
         <ScrollSmooth>
           <main>{children}</main>
           <Toaster />
-          </ScrollSmooth>
+        </ScrollSmooth>
       </body>
 
     </html>
