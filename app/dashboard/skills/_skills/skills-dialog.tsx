@@ -9,7 +9,6 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog"
 import { useState } from "react"
-
 import SkillsForm from "@/components/form/skills-form"
 
 export default function SkillsDialog({ open, setOpen }: { open: boolean, setOpen: React.Dispatch<React.SetStateAction<boolean>> }) {

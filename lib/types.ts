@@ -4,3 +4,28 @@ export interface LogoData {
     width: number;
     height: number;
 }
+
+export interface BadgeData {
+    name: string;
+    description: string;
+}
+
+export interface SkillData {
+    id: number;
+    name: string;
+    logo : string;
+    description: string;
+}
+
+
+export interface ResponseApi {
+    message: string;
+    content: SkillData[] | null;
+}
+
+export interface Store {
+    data: ResponseApi | null;
+    loading: boolean;
+    error: string | null;
+    fetchData: () => Promise<void>;
+}
