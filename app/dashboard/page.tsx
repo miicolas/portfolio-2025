@@ -1,6 +1,6 @@
 import { getSession } from "@/lib/get-session";
 import { getRole } from "@/lib/get-role";
-import Skills from "./_dashboard/skills/skills";
+
 
 export default async function Dashboard() {
 
@@ -18,7 +18,7 @@ export default async function Dashboard() {
     return (
         <div>
             <h1>Dashboard</h1>
-            <Skills />
+            
         </div>
     );
 }
