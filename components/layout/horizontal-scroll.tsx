@@ -37,7 +37,7 @@ export default function HorizontalScroll({ children, itemCount }: ScrollSectionP
 
     return (
         
-        <div className="relative">
+        <motion.div className="relative" initial={{ opacity: 0 , y: 100, scale: 0.8 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} viewport={{ once: true }} transition={{ duration: 2 }}>
             <div className="absolute top-0 left-0 h-full w-10 bg-gradient-to-r from-neutral-50 to-neutral-50/0 z-50"></div>
             <section className="relative h-[300vh]" ref={targetRef}>
                 <div className="sticky top-0 flex h-screen justify-center items-center overflow-hidden snap-y snap-mandatory">
@@ -47,6 +47,6 @@ export default function HorizontalScroll({ children, itemCount }: ScrollSectionP
                 </div>
             </section>
             <div className="absolute top-0 right-0 h-full w-10 bg-gradient-to-l from-neutral-50 to-neutral-50/0 z-50"></div>
-        </div>
+        </motion.div>
     );
 };
