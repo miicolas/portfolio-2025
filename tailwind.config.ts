@@ -169,14 +169,16 @@ export default withUt({
     		}
     	},
     	fontFamily: {
-    		bloop: ['var(--font-dx-bloop)'],
+    		bloop: [
+    			'var(--font-dx-bloop)'
+    		],
     		mono: [
     			'JetBrains Mono"',
     			'monospace'
-			],
-			neueMontreal: [
-				'var(--font-neue-montreal)'
-			],
+    		],
+    		neueMontreal: [
+    			'var(--font-neue-montreal)'
+    		]
     	}
     },
 	plugins: [require("tailwindcss-animate")],
