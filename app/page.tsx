@@ -7,13 +7,13 @@ import Footer from "@/components/layout/footer";
 
 export default function Home() {
   return (
-    <>
+    <div className="max-w-7xl mx-auto">
       <Header />
       <Hero />
       <Exploration />
       <Experience />
       <Skills />
       <Footer/>
-    </>
+    </div>
   );
 }
