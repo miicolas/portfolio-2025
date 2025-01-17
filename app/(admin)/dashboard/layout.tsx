@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "../globals.css";
+import "../../globals.css";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/layout/app-sidebar"
 
@@ -18,7 +18,7 @@ export default function RootLayout({
     return (
         <SidebarProvider>
             <AppSidebar />
-            <main >
+            <main className="w-full">
                 <SidebarTrigger />
                 {children}
             </main>

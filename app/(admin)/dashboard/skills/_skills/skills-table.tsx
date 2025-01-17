@@ -25,6 +25,7 @@ import { MoreHorizontal, Pencil, Trash2, Eye } from "lucide-react"
 import { useEffect } from "react"
 import { useGetSkillsStore } from "@/store/get-skills"
 import { Skeleton } from "@/components/ui/skeleton"
+import { toast } from "sonner"
 
 export default function SkillsTable() {
     const { data, loading, error, fetchData } = useGetSkillsStore()
@@ -40,6 +41,27 @@ export default function SkillsTable() {
             </div>
         )
     }
+
+    const handleDelete = async (id: number) => {
+        try {
+            const response = await fetch(`/api/delete-skill`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    id,
+                }),
+            });
+            const data = await response.json();
+            toast.success(data.message);
+            fetchData();
+        }
+        catch (error) {
+            console.error("Error deleting skill:", error);
+            toast.error("Failed to delete skill");
+        }
+    };
 
     return (
         <div className="rounded-lg border bg-card">
@@ -81,8 +103,8 @@ export default function SkillsTable() {
                                 </TableCell>
                                 <TableCell>
                                     <div className="w-10 h-10 rounded-lg border bg-gray-50 p-1 flex items-center justify-center">
-                                        <img 
-                                            src={skill.logo} 
+                                        <img
+                                            src={skill.logo}
                                             alt={`${skill.name} logo`}
                                             className="max-w-full max-h-full object-contain"
                                         />
@@ -91,9 +113,9 @@ export default function SkillsTable() {
                                 <TableCell className="text-left">
                                     <DropdownMenu>
                                         <DropdownMenuTrigger asChild>
-                                            <Button 
-                                                variant="ghost" 
-                                                className="h-8 w-8 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                                            <Button
+                                                variant="ghost"
+                                                className="h-8 w-8 p-2"
                                             >
                                                 <MoreHorizontal className="h-4 w-4" />
                                             </Button>
@@ -109,7 +131,7 @@ export default function SkillsTable() {
                                                 <Pencil className="mr-2 h-4 w-4" />
                                                 Edit Skill
                                             </DropdownMenuItem>
-                                            <DropdownMenuItem className="text-red-600">
+                                            <DropdownMenuItem className="text-red-600" onClick={() => handleDelete(skill.id)}>
                                                 <Trash2 className="mr-2 h-4 w-4" />
                                                 Delete
                                             </DropdownMenuItem>
