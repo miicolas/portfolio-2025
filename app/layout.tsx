@@ -13,16 +13,6 @@ const dx_Bloop = localFont({
   variable: '--font-dx-bloop',
 })
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 const neueMontreal = localFont({
   src: [
     {
@@ -60,9 +50,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${dx_Bloop.variable} ${neueMontreal.className} antialiased bg-neutral-50 text-neutral-900 dark:bg-neutral-900 dark:text-neutral-50 p-4 w-full`}
+        className={`${dx_Bloop.variable} ${neueMontreal.className} antialiased bg-neutral-50 text-neutral-900 dark:bg-neutral-900 dark:text-neutral-50 p-4 w-full`}
       >
-        <ScrollSmooth>
+        <ScrollSmooth duration={1.2}>
           <main>{children}</main>
           <Toaster />
         </ScrollSmooth>
