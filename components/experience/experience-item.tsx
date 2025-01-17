@@ -1,6 +1,9 @@
 import { motion } from "motion/react";
-import { Calendar, Building2 } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import { Separator } from "../ui/separator";
+
 
 
 interface ExperienceItemProps {
@@ -17,7 +20,7 @@ interface ExperienceItemProps {
 }
 
 
-export default function ExperienceItem({ experience, index, isMobile } : ExperienceItemProps) {
+export default function ExperienceItem({ experience, index, isMobile }: ExperienceItemProps) {
     const isLeft = index % 2 === 0;
     return (
         <motion.div
@@ -36,24 +39,6 @@ export default function ExperienceItem({ experience, index, isMobile } : Experie
             viewport={{ once: true, margin: "-15% 0px -15% 0px" }}
             className={`relative flex ${isMobile ? 'flex-col' : 'items-center'} mb-10 lg:mb-24 ${isMobile ? '' : (isLeft ? 'justify-start' : 'justify-end')}`}
         >
-            <motion.div
-                initial={{ scale: 0, opacity: 0 }}
-                whileInView={{
-                    scale: 1,
-                    opacity: 1,
-                    transition: {
-                        type: "spring",
-                        stiffness: 200,
-                        damping: 15,
-                        delay: index * 0.15
-                    }
-                }}
-                viewport={{ once: true }}
-                className={`absolute w-5 h-5 bg-neutral-100 shadow-lg border-2 border-indigo-500 rounded-full z-20 
-                    ${isMobile ? 'left-8 -ml-2' : isLeft ? 'left-1/2 -translate-x-1/2 -ml-2' : 'right-1/2 translate-x-1/2 -mr-3'}
-                    hover:scale-150 hover:bg-indigo-50 transition-all duration-300 ease-in-out 
-                `}
-            />
 
             <motion.div
                 className={`w-full lg:w-5/12 ${isMobile ? 'pl-16' : isLeft ? 'pr-16' : 'pl-16'} relative`}
@@ -71,40 +56,40 @@ export default function ExperienceItem({ experience, index, isMobile } : Experie
                 viewport={{ once: true }}
             >
                 <motion.div
-                    className="group relative cursor-pointer rounded-xl border border-neutral-200 bg-neutral-100 p-6 shadow-sm transition-all duration-300 ease-in-out hover:shadow-xl"
+                    className="group relative rounded-xl border border-transparent hover:border-neutral-200 hover:bg-neutral-100 p-6 transition-all duration-300 ease-in-out  shadow-indigo-400"
                 >
+
                     <div className="flex flex-col space-y-3">
+                        
                         <div className="flex items-start justify-between">
                             <div className="flex items-center space-x-3">
-                                <div className="p-2 bg-indigo-50 rounded-lg">
-                                    <Building2 className="h-5 w-5 text-indigo-600 group-hover:text-indigo-800" />
-                                </div>
-                                <h3 className="text-xl font-bold text-indigo-600 group-hover:text-indigo-800 transition-colors">
+
+                                <h3 className="text-xl">
                                     {experience[index].company}
                                 </h3>
                             </div>
                         </div>
 
-                        <p className="text-neutral-800 dark:text-neutral-50 text-lg font-medium">
+                        <p className="text-neutral-800 dark:text-neutral-50 text-lg font-medium text-balance">
                             {experience[index].position}
                         </p>
-
-                        <div className="flex items-center space-x-2 text-neutral-600">
-                            <Calendar className="h-4 w-4" />
-                            <p className="text-sm">
+                        <Separator className="w-16 group-hover:w-24 transition-all duration-200 ease-in-out" />
+                        <div className="flex justify-between space-x-2 text-neutral-600">
+                            <p className="text-sm font-light">
                                 {experience[index].startDate} - {experience[index].endDate}
                             </p>
+                            <Link href={`/experience/${experience[index].id}`} className="group-[button] bg-transparent text-neutral-500 dark:text-neutral-50 group-hover:text-neutral-900 rounded-full group-hover:bg-neutral-200 p-2 dark:group-hover:text-neutral-300 transition-all duration-200 ease-in-out">
+                                <ExternalLink strokeWidth={1} size={24} className="text-neutral-500 dark:text-neutral-50 group-hover:text-neutral-900 dark:group-hover:text-neutral-300 transition-all duration-200 ease-in-out" />
+                            </Link>
+
                         </div>
                     </div>
 
-                    <motion.div
-                        className="absolute inset-0 rounded-xl border-2 border-indigo-600 opacity-0 transition-all duration-300 ease-in-out group-hover:opacity-100"
-                        initial={false}
-                    />
+
                 </motion.div>
 
                 <motion.div
-                    className={`absolute ${isMobile ? 'hidden': isLeft ? '-left-24 top-64 -rotate-6' : '-right-24 bottom-64 rotate-3'}`}
+                    className={`absolute ${isMobile ? 'hidden' : isLeft ? '-left-24 top-64 -rotate-6' : '-right-24 bottom-64 rotate-3'}`}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{
                         opacity: 1,
