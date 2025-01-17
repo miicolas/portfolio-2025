@@ -1,5 +1,4 @@
-import { Calendar, Home, BicepsFlexed, Search, Settings } from "lucide-react"
-
+import { Calendar, Home, BicepsFlexed, Search, Settings } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -9,9 +8,8 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
 
-// Menu items.
 const items = [
   {
     title: "Home",
@@ -38,9 +36,10 @@ const items = [
     url: "#",
     icon: Settings,
   },
-]
+];
 
-export function AppSidebar() {
+export async function AppSidebar() {
+
   return (
     <Sidebar>
       <SidebarContent>
@@ -51,8 +50,8 @@ export function AppSidebar() {
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <a href={item.url}>
-                      <item.icon />
+                    <a href={item.url} className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 rounded-lg transition-colors">
+                      <item.icon className="w-5 h-5" />
                       <span>{item.title}</span>
                     </a>
                   </SidebarMenuButton>
@@ -62,6 +61,7 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      
     </Sidebar>
-  )
+  );
 }

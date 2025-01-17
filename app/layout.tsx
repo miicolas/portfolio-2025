@@ -1,11 +1,9 @@
 
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ScrollSmooth from "@/components/layout/scroll-smooth";
 import { Toaster } from "@/components/ui/sonner"
 import localFont from 'next/font/local'
- 
 
 const dx_Bloop = localFont({
   src: './font/graffity-fill-webfont.woff2',
@@ -33,8 +31,6 @@ const neueMontreal = localFont({
   ],
   variable: '--font-neueMontreal',
 });
-
-
 
 export const metadata: Metadata = {
   title: "Nicolas Bechart - Portfolio",
