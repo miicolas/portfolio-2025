@@ -6,7 +6,8 @@ export default function Skills() {
     
 
     return (
-        <div className="w-[75vw] mt-10">
+        <div className="w-full mt-10 flex flex-col gap-4">
+            <h1 className="text-center text-3xl font-bold">Skills</h1>
             <SkillsDialogButton />
             <SkillsTable />
         </div>
