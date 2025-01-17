@@ -4,6 +4,7 @@ import Exploration from "@/components/layout/exploration";
 import Experience from "@/components/layout/experience";
 import Skills from "@/components/layout/skills";
 import Footer from "@/components/layout/footer";
+import Contact from "@/components/layout/contact";
 
 export default function Home() {
   return (
@@ -13,7 +14,8 @@ export default function Home() {
       <Exploration />
       <Experience />
       <Skills />
-      <Footer/>
+      <Contact />
+      <Footer />
     </div>
   );
 }
