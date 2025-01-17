@@ -3,6 +3,7 @@ export interface LogoData {
     alt: string;
     width: number;
     height: number;
+    className?: string;
 }
 
 export interface BadgeData {
