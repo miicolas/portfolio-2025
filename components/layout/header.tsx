@@ -17,7 +17,7 @@ export default function Header() {
                             href={link.href}
                             className="text-neutral-500 border border-transparent py-2 px-4 rounded-full hover:text-neutral-700 hover:border-neutral-200 dark:text-neutral-400 dark:hover:text-neutral-300 dark:hover:border-neutral-600 transition-all duration-300"
                         >
-                            <span>{link.name}</span>
+                            <span className="font-neueMontreal font-light">{link.name}</span>
                         </Link>
                     </li>
                 ))}

@@ -28,14 +28,14 @@ export default function Badge({ name, description }: BadgeData) {
                     once: true,
                     margin: "-50px"
                 }}
-               
+
             >
                 <span className="text-xl font-medium text-neutral-800 dark:text-neutral-50">
                     {name}
                 </span>
             </motion.div>
             <motion.p
-                className="text-2xl font-neueMontreal font-light text-neutral-800 dark:text-neutral-50 text-balance text-center"
+                className="text-2xl font-neueMontreal font-light text-neutral-800 dark:text-neutral-50 text-balance text-center max-w-4xl"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{
                     opacity: 1,
