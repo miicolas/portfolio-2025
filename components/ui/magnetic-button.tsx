@@ -6,7 +6,6 @@ import { motion } from 'motion/react';
 export default function MagneticButton({children}: {children: ReactNode}) {
     const ref = useRef<HTMLDivElement>(null);
     const [position, setPosition] = useState({x: 0, y: 0});
-    const [isHovered, setIsHovered] = useState(false);
 
     const handleMouse = (e: React.MouseEvent) => {
         const { clientX, clientY } = e;
@@ -19,7 +18,6 @@ export default function MagneticButton({children}: {children: ReactNode}) {
 
     const reset = () => {
         setPosition({ x: 0, y: 0 });
-        setIsHovered(false);
     }
 
     const { x, y } = position;
@@ -28,7 +26,6 @@ export default function MagneticButton({children}: {children: ReactNode}) {
             style={{ position: "relative" }}
             ref={ref}
             onMouseMove={handleMouse}
-            onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={reset}
             animate={{ x, y }}
             transition={{ type: "spring", stiffness: 100, damping: 8, mass: 0.5 }}

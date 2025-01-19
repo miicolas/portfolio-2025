@@ -2,7 +2,7 @@ import { NextResponse} from "next/server";
 import { db } from "@/db";
 import { skillsTable } from "@/db/schema";
 
-export async function GET(req: Request, res: Response) {
+export async function GET() {
     try {
 
         const skills = await db.select().from(skillsTable);

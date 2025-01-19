@@ -26,6 +26,7 @@ import { useEffect } from "react"
 import { useGetSkillsStore } from "@/store/get-skills"
 import { Skeleton } from "@/components/ui/skeleton"
 import { toast } from "sonner"
+import Image from 'next/image';
 
 export default function SkillsTable() {
     const { data, loading, error, fetchData } = useGetSkillsStore()
@@ -103,10 +104,12 @@ export default function SkillsTable() {
                                 </TableCell>
                                 <TableCell>
                                     <div className="w-10 h-10 rounded-lg border bg-gray-50 p-1 flex items-center justify-center">
-                                        <img
+                                        <Image
                                             src={skill.logo}
                                             alt={`${skill.name} logo`}
                                             className="max-w-full max-h-full object-contain"
+                                            width={100}
+                                            height={100}
                                         />
                                     </div>
                                 </TableCell>

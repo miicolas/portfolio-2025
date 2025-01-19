@@ -29,6 +29,14 @@ export default function Skills() {
         );
     }
 
+    if (loading) {
+        return (
+            <div className="rounded-lg border border-blue-200 bg-blue-50 p-4 text-center text-sm text-blue-600">
+                Loading skills...
+            </div>
+        );
+    }
+
     const positionLogo = (index: number) => [
         { top: '10rem', left: '5rem' },
         { top: '2rem', right: '5rem' },

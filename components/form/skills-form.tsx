@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { set, z } from "zod"
+import { z } from "zod"
 import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
@@ -116,7 +116,7 @@ export default function SkillsForm({ setOpen }: SkillsFormProps) {
                     <FormField
                         control={form.control}
                         name="logo"
-                        render={({ field }) => (
+                        render={() => (
                             <FormItem>
                                 <FormLabel>Logo</FormLabel>
                                 <FormControl>

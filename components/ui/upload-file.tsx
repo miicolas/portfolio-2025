@@ -18,6 +18,7 @@ export default function UploadFile({ onUploadComplete }: UploadFileProps) {
             }}
             className="mt-4 ut-button:bg-indigo-500 ut-button:text-white ut-button:hover:bg-indigo-600 ut-button:active:bg-indigo-700 ut-button:disabled:bg-neutral-200 ut-button:disabled:text-neutral-500 w-fit ut-uploading:text-white"
             onUploadError={(error: Error) => {
+                console.error(error);
                 toast.error('Upload failed');
             }}
         />
