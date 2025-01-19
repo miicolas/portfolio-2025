@@ -173,7 +173,7 @@ export default withUt({
     			'var(--font-dx-bloop)'
     		],
     		mono: [
-    			'JetBrains Mono"',
+    			'JetBrains Mono',
     			'monospace'
     		],
     		neueMontreal: [
