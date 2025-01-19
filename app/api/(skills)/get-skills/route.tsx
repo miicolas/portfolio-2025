@@ -7,8 +7,6 @@ export async function GET() {
 
         const skills = await db.select().from(skillsTable);
 
-        console.log(skills, 'skills');
-
         return NextResponse.json({
             message: "Skills getting successfully",
             content : skills
