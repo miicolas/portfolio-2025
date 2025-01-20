@@ -15,5 +15,10 @@ export const auth = betterAuth({
     session: {
         expiresIn: 60 * 60 * 24 * 7,
         updateAge: 60 * 60 * 24 
-    }
+    },
+    trustedOrigins: [
+        'https://nicolas-becharat.com',
+        'https://nicolas-becharat.com/api/auth',
+        'https://localhost:3000',
+    ],
 });
