@@ -38,7 +38,7 @@ export default function Skills() {
     }
 
     const positionLogo = (index: number) => [
-        { top: '10rem', left: '5rem' },
+        { top: '10rem', left: '5rem', },
         { top: '2rem', right: '5rem' },
         { top: '3rem', left: '0rem' },
         { top: '9rem', right: '1rem' },

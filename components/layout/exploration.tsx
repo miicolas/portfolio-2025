@@ -2,7 +2,7 @@
 
 import { MoveDown, MoveRight } from "lucide-react";
 import HorizontalScoll from "./horizontal-scroll";
-import CardProject from "@/app/projects/_projects/card-project";
+import CardProject from "@/app/(client)/projects/_projects/card-project";
 import MagneticButton from "@/components/ui/magnetic-button";
 import Badge from "../ui/badge";
 import { useGetProjectsStore } from "@/store/get-projects";

@@ -9,7 +9,7 @@ export default function Contact() {
             className="py-16 w-full min-h-[50vh] max-w-4xl mx-auto space-y-16 flex flex-col justify-center items-center relative"
             id="contact"
         >
-            <p className='absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-xl text-neutral-500 px-16 py-8 group-hover:text-neutral-200 group-active:text-neutral-400 font-light -rotate-3'>
+            <p className='absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-xl text-neutral-500 px-4 lgpx-16 py-8 group-hover:text-neutral-200 group-active:text-neutral-400 font-light -rotate-3'>
                 Tap this &apos;tiny&apos; button to connect with me =)
             </p>
             <Link href="/contact">
@@ -67,7 +67,7 @@ export default function Contact() {
                                         transformOrigin: "50% 50%",
                                     }}
                                 >
-                                    <p className="text-center text-8xl font-medium text-neutral-100 px-16 py-8 group-hover:text-neutral-200 group-active:text-neutral-400">
+                                    <p className="text-center text-4xl lg:text-8xl font-medium text-neutral-100 px-16 py-8 group-hover:text-neutral-200 group-active:text-neutral-400">
                                         Connect
                                     </p>
                                 </motion.div>
