@@ -8,23 +8,19 @@ export async function DELETE(req: Request) {
     const body = await req.json();
     const { id } = body;
 
-   
-
-    const skill = await db
+    const experience = await db
         .delete(skillsTable)
         .where(eq(skillsTable.id, id));
-    
-
 
     return NextResponse.json({ 
-      message: "Skill deleted successfully",
-      skill 
+      message: "Experience deleted successfully",
+      experience 
     });
 
   } catch (error) {
-    console.error("Error deleted skill:", error);
+    console.error("Error deleted experience:", error);
     return NextResponse.json(
-      { error: "Failed to deleted skill" },
+      { error: "Failed to deleted experience" },
       { status: 500 }
     );
   }
