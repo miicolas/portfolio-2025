@@ -40,12 +40,19 @@ export default function Exploration() {
             <Badge name="Exploration" description="Exploration allow me to discover new things and to learn new skills. I am always looking for new challenges and opportunities to grow." />
 
             <HorizontalScoll itemCount={3}>
-                {data?.content?.map((project) => (
+            {(data?.content as ProjectData[])?.map((project: ProjectData) => (
                     <CardProject
-                        {
-                            ...project as ProjectData
-                        }
-                        
+                        key={project.id}
+                        id={project.id}
+                        name={project.name}
+                        description={project.description}
+                        logo={project.logo}
+                        image_preview={project.image_preview}
+                        image_preview_secondary={project.image_preview_secondary}
+                        link={project.link}
+                        github={project.github}
+                        tech_stack={project.tech_stack}
+                        status={project.status}
                     />
                 ))}
 

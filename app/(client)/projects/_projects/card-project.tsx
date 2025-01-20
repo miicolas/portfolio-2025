@@ -6,7 +6,7 @@ import Link from "next/link"
 import { ProjectData } from "@/lib/types"
 
 
-export default function CardProject({ name, description, logo, image_preview, image_preview_secondary }: ProjectData) {
+export default function CardProject({ name, description, image_preview, image_preview_secondary }: ProjectData) {
 
     return (
         <Card className="w-[70vw] h-[70vh] xl:w-[100vh] bg-neutral-100 rounded-lg p-10 overflow-hidden relative group">
