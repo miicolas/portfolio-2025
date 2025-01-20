@@ -19,6 +19,10 @@ export const projectsTable = mysqlTable('projects_table', {
     description: varchar({ length: 255 }).notNull(),
     link: varchar({ length: 255 }),
     github: varchar({ length: 255 }),
+    image_preview: varchar({ length: 255 }).notNull(),
+    image_preview_secondary: varchar({ length: 255 }).notNull(),
+    tech_stack: varchar({ length: 255 }),
+    status: varchar({ length: 255 }),
 
 });
 

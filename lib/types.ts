@@ -18,10 +18,24 @@ export interface SkillData {
     description: string;
 }
 
+export interface ProjectData {
+    key: number;
+    id: number;
+    name: string;
+    logo : string;
+    description: string;
+    image_preview: string;
+    image_preview_secondary: string;
+    link: string;
+    github: string;
+    tech_stack: string;
+    status: string;
+}
+
 
 export interface ResponseApi {
     message: string;
-    content: SkillData[] | null;
+    content: SkillData[] | ProjectData[] | null;
 }
 
 export interface Store {
@@ -30,3 +44,4 @@ export interface Store {
     error: string | null;
     fetchData: () => Promise<void>;
 }
+

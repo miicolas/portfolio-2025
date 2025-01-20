@@ -5,9 +5,34 @@ import HorizontalScoll from "./horizontal-scroll";
 import CardProject from "@/app/projects/_projects/card-project";
 import MagneticButton from "@/components/ui/magnetic-button";
 import Badge from "../ui/badge";
+import { useGetProjectsStore } from "@/store/get-projects";
+import { useEffect } from "react";
+import { ProjectData } from "@/lib/types";
 
 
 export default function Exploration() {
+
+    const { data, loading, error, fetchData } = useGetProjectsStore()
+
+    useEffect(() => {
+        fetchData()
+    }, [fetchData])
+
+    if (error) {
+        return (
+            <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-center text-sm text-red-600">
+                Error loading Projects: {error}
+            </div>
+        )
+    }
+
+    if (loading) {
+        return (
+            <div className="rounded-lg border border-blue-200 bg-blue-50 p-4 text-center text-sm text-blue-600">
+                Loading Projects...
+            </div>
+        )
+    }
 
     return (
         <div className="py-16 mt-16" id="exploration">
@@ -15,9 +40,14 @@ export default function Exploration() {
             <Badge name="Exploration" description="Exploration allow me to discover new things and to learn new skills. I am always looking for new challenges and opportunities to grow." />
 
             <HorizontalScoll itemCount={3}>
-                <CardProject />
-                <CardProject />
-                <CardProject />
+                {data?.content?.map((project) => (
+                    <CardProject
+                        {
+                            ...project as ProjectData
+                        }
+                        
+                    />
+                ))}
 
                 <div className="my-auto">
                     <MagneticButton>
