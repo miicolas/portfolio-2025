@@ -17,6 +17,8 @@ export const auth = betterAuth({
         updateAge: 60 * 60 * 24 
     },
     trustedOrigins: [
+        'https://dev.nicolas-becharat.com',
+        'https://dev.nicolas-becharat.com/api/auth',
         'https://nicolas-becharat.com',
         'https://nicolas-becharat.com/api/auth',
         'https://localhost:3000',
