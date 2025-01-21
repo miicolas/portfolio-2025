@@ -45,13 +45,13 @@ export default function ContactForm() {
     function onSubmit(values: z.infer<typeof formSchema>) {
 
         console.log(values)
-        fetch("/api/send/", {
+        /* fetch("/api/send/", {
             method: "POST",
             body: JSON.stringify(values),
             headers: {
                 "Content-Type": "application/json",
             },
-        })
+        }) */
     }
 
     return (
