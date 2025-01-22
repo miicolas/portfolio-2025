@@ -1,9 +1,7 @@
 'use client'
 import Card from "@/components/ui/card"
-import Image from "next/image"
 import { MoveDiagonal } from "lucide-react"
 import Link from "next/link"
-import { ProjectData } from "@/lib/types"
 import { Skeleton } from "@/components/ui/skeleton"
 
 
