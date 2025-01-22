@@ -8,7 +8,7 @@ import { motion } from "motion/react";
 
 export default function Contact() {
     return (
-        <>
+        <div className="max-w-7xl mx-auto">
             <Header />
             <main className="py-16 space-y-8 ">
                 <Badge name="Contact" description="Contact me to get in touch with me." />
@@ -19,6 +19,6 @@ export default function Contact() {
 
             </main>
             <Footer />
-        </>
+        </div>
     )
 }
