@@ -2,7 +2,7 @@
 import { NextResponse } from "next/server";
 
 let lastNotificationTime = 0;
-const RATE_LIMIT_DELAY = 60 * 1000; 
+const RATE_LIMIT_DELAY = 60 * 1000;
 
 export async function SEND_NOTIFICATION(subject: string, name: string, message: string, email: string) {
     const currentTime = Date.now();

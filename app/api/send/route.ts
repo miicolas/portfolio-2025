@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-import {SEND_NOTIFICATION} from "@/app/(client)/contact/action";
-
+import { SEND_NOTIFICATION } from "@/app/(client)/contact/action";
 
 export async function POST(req: Request) {
   try {
@@ -9,16 +8,18 @@ export async function POST(req: Request) {
 
     const response = await SEND_NOTIFICATION(subject, name, message, email);
 
-    console.log(response);
+    if (response.status !== 200) {
+      return response;
+    }
 
     return NextResponse.json({ 
       message: "Response sent successfully", 
     });
 
   } catch (error) {
-    console.error("Error adding skill:", error);
+    console.error("Error sending notification:", error);
     return NextResponse.json(
-      { error: "Failed to add skill" },
+      { error: "Failed to send notification" },
       { status: 500 }
     );
   }
