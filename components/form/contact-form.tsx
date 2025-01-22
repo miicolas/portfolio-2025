@@ -45,20 +45,20 @@ export default function ContactForm() {
     function onSubmit(values: z.infer<typeof formSchema>) {
 
         console.log(values)
-        /* fetch("/api/send/", {
+        fetch("/api/send/", {
             method: "POST",
             body: JSON.stringify(values),
             headers: {
                 "Content-Type": "application/json",
             },
-        }) */
+        })
     }
 
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                 <FormField
-                    control={form.control} 
+                    control={form.control}
                     name="name"
                     render={({ field }) => (
                         <FormItem>

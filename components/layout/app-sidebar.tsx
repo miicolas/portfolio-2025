@@ -27,6 +27,11 @@ const items = [
     icon: Calendar,
   },
   {
+    title: "Experiences",
+    url: "/dashboard/experiences",
+    icon: Calendar,
+  },
+  {
     title: "Search",
     url: "#",
     icon: Search,
