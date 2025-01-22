@@ -6,7 +6,7 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { subject, name, message, email } = body;
 
-    const response = await SEND_NOTIFICATION(subject, name, message, email);
+    const response = await SEND_NOTIFICATION({ subject, name, message, email });
 
     if (response.status !== 200) {
       return response;

@@ -32,6 +32,14 @@ export interface ProjectData {
     status: string;
 }
 
+export interface ContactData {
+    id?: string;
+    name: string;
+    email: string;
+    message: string;
+    subject: string;
+}
+
 
 export interface ResponseApi {
     message: string;

@@ -47,7 +47,12 @@ export default function ContactForm() {
         console.log(values)
         fetch("/api/send/", {
             method: "POST",
-            body: JSON.stringify(values),
+            body: JSON.stringify({
+                subject: values.subject,
+                name: values.name,
+                message: values.message.replace(/[\n\t@#]/g, ' ').trim(),                email: values.email,
+
+            }),
             headers: {
                 "Content-Type": "application/json",
             },

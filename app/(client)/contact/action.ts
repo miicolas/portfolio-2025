@@ -1,10 +1,11 @@
 'use server';
 import { NextResponse } from "next/server";
+import { ContactData } from "@/lib/types";
 
 let lastNotificationTime = 0;
 const RATE_LIMIT_DELAY = 60 * 1000;
 
-export async function SEND_NOTIFICATION(subject: string, name: string, message: string, email: string) {
+export async function SEND_NOTIFICATION({ subject, name, message, email }: ContactData) {
     const currentTime = Date.now();
 
     if (currentTime - lastNotificationTime < RATE_LIMIT_DELAY) {
