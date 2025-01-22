@@ -1,25 +1,37 @@
 import { NextResponse } from "next/server";
 import { SEND_NOTIFICATION } from "@/app/(client)/contact/action";
 
+
+
 export async function POST(req: Request) {
+
   try {
-    const body = await req.json();
-    const { subject, name, message, email } = body;
 
-    const response = await SEND_NOTIFICATION({ subject, name, message, email });
+    let { message, email, subject, name } = await req.json();
 
-    if (response.status !== 200) {
-      return response;
+
+    message = message
+      .replace(/[\n\t@#]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+    const response = await SEND_NOTIFICATION({ message, email, subject, name });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || "Échec de l'envoi");
     }
 
-    return NextResponse.json({ 
-      message: "Response sent successfully", 
-    });
+    return NextResponse.json({
+      message: "Message envoyé avec succès",
+    }, { status: 200 });
 
   } catch (error) {
-    console.error("Error sending notification:", error);
     return NextResponse.json(
-      { error: "Failed to send notification" },
+      {
+        error: "Erreur de traitement",
+        message: error instanceof Error ? error.message : "Veuillez réessayer plus tard"
+      },
       { status: 500 }
     );
   }
