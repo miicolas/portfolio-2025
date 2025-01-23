@@ -23,13 +23,13 @@ import {
 import { Button } from "@/components/ui/button"
 import { MoreHorizontal, Pencil, Trash2, Eye } from "lucide-react"
 import { useEffect } from "react"
-import { useGetProjectsStore } from "@/store/get-projects"
+import { useGetExperiencesStore } from "@/store/get-experiences"
 import { Skeleton } from "@/components/ui/skeleton"
 import { toast } from "sonner"
 import Image from 'next/image';
 
 export default function ExperiencesTable() {
-    const { data, loading, error, fetchData } = useGetProjectsStore()
+    const { data, loading, error, fetchData } = useGetExperiencesStore()
 
     useEffect(() => {
         fetchData()

@@ -3,9 +3,9 @@ import { Button } from "../ui/button"
 
 export default function Header() {
     const navLinks = [
-        { name: "Exploration", href: "#exploration", responsive: true },
-        { name: "Experience", href: "#experience", responsive: false },
-        { name: "Skills", href: "#skills", responsive: false },
+        { name: "Exploration", href: "/#exploration", responsive: true },
+        { name: "Experience", href: "/#experience", responsive: false },
+        { name: "Skills", href: "/#skills", responsive: false },
     ]
 
     return (

@@ -4,7 +4,6 @@ import { skillsTable } from "@/db/schema";
 
 export async function GET() {
     try {
-
         const skills = await db.select().from(skillsTable);
 
         return NextResponse.json({

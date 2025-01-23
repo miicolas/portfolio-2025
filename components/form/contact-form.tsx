@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { Send } from "lucide-react"
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -58,18 +59,18 @@ export default function ContactForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 mt-2">
-        <div className="border-y border-neutral-200 py-4 space-y-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="mt-2">
+        <div className="border-y border-neutral-200 py-4 mt-4">
           <FormField
             control={form.control}
             name="name"
             render={({ field }) => (
               <FormItem className="flex items-center gap-4">
-                <FormLabel>Name</FormLabel>
+                <FormLabel className="mt-2">Name</FormLabel>
                 <FormControl>
-                  <Input 
-                    placeholder="Name" 
-                    {...field} 
+                  <Input
+                    placeholder="Name"
+                    {...field}
                     className="w-full focus-visible:ring-transparent border-neutral-200"
                   />
                 </FormControl>
@@ -83,7 +84,7 @@ export default function ContactForm() {
             name="email"
             render={({ field }) => (
               <FormItem className="flex items-center gap-4">
-                <FormLabel>Email</FormLabel>
+                <FormLabel className="mt-2">Email</FormLabel>
                 <FormControl>
                   <Input
                     placeholder="Email"
@@ -104,7 +105,7 @@ export default function ContactForm() {
             name="subject"
             render={({ field }) => (
               <FormItem className="flex items-center gap-4">
-                <FormLabel>Subject</FormLabel>
+                <FormLabel className="mt-2">Subject</FormLabel>
                 <FormControl>
                   <Input
                     placeholder="Subject"
@@ -138,7 +139,10 @@ export default function ContactForm() {
         </div>
 
         <div className="flex justify-end py-4">
-          <Button type="submit">Submit</Button>
+          <Button type="submit">
+            <Send size={16} />
+            Submit
+          </Button>
         </div>
       </form>
     </Form>

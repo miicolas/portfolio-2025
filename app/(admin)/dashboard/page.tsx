@@ -5,6 +5,9 @@ import { getRole } from "@/lib/get-role";
 export default async function Dashboard() {
 
     const session = await getSession();
+    if (!session) {
+        return <div>You are not logged in.</div>;
+    }
     const isAdmin = await getRole(session!.user.id);
 
     if (!session || !session.user.id) {

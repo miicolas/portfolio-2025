@@ -20,23 +20,25 @@ import UploadFile from "../ui/upload-file"
 import { useState } from "react"
 
 const formSchema = z.object({
-    name: z.string().min(2, {
-        message: "Name must be at least 2 characters long",
+    company: z.string().min(1, {
+        message: "Company must be at least 1 characters long",
     }).max(255, {
-        message: "Name must be at most 255 characters long",
+        message: "Company must be at most 255 characters long",
     }),
-    description: z.string().min(2, {
-        message: "Description must be at least 2 characters long",
+    position: z.string().min(1, {
+        message: "Position must be at least 1 characters long",
     }).max(255, {
-        message: "Description must be at most 255 characters long",
+        message: "Position must be at most 255 characters long",
+    }),
+    startDate: z.date().max(new Date(), {
+        message: "Start date must be in the past or today",
+    }),
+    endDate: z.date().refine(date => date >= new Date(), {
+        message: "End date must be in the future or today",
     }),
     logo: z.string().url(),
-    link: z.string().url().optional(),
-    github: z.string().url().optional(),
-    image_preview: z.string().url(),
-    image_preview_secondary: z.string().url(),
-    tech_stack: z.string().optional(),
-    status: z.string().optional(),
+
+
 })
 
 interface ProjectsFormProps {
@@ -45,41 +47,32 @@ interface ProjectsFormProps {
 
 export default function ExperiencesForm({ setOpen }: ProjectsFormProps) {
     const [logoUrl, setLogoUrl] = useState("");
-    const [imagePreviewUrl, setImagePreviewUrl] = useState("");
-    const [imagePreviewSecondaryUrl, setImagePreviewSecondaryUrl] = useState("");
+
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            name: "",
-            description: "",
+            company: "",
+            position: "",
+            startDate: new Date(),
+            endDate: new Date(),
             logo: "",
-            link: "",
-            github: "",
-            image_preview: "",
-            image_preview_secondary: "",
-            tech_stack: "",
-            status: "",
         },
     });
 
     function onSubmit(values: z.infer<typeof formSchema>) {
-        const { name, description, logo, image_preview, image_preview_secondary, link, github, tech_stack, status } = values;
+        const { company, position, startDate, endDate, logo } = values;
         fetch("/api/add-project", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                name,
+                company,
+                position,
+                startDate,
+                endDate,
                 logo,
-                description,
-                github,
-                link,
-                image_preview,
-                image_preview_secondary,
-                tech_stack,
-                status,
             }),
         })
             .then((response) => response.json())
@@ -101,25 +94,15 @@ export default function ExperiencesForm({ setOpen }: ProjectsFormProps) {
         form.setValue("logo", url);
     };
 
-    const handleImagePreviewUploadComplete = (url: string) => {
-        setImagePreviewUrl(url);
-        form.setValue("image_preview", url);
-    };
-
-    const handleImagePreviewSecondaryUploadComplete = (url: string) => {
-        setImagePreviewSecondaryUrl(url);
-        form.setValue("image_preview_secondary", url);
-    };
-
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
                 <FormField
                     control={form.control}
-                    name="name"
+                    name="company"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Project Name</FormLabel>
+                            <FormLabel>Company Name</FormLabel>
                             <FormControl>
                                 <Input placeholder="Project Name" {...field} className="w-fit" />
                             </FormControl>
@@ -132,12 +115,12 @@ export default function ExperiencesForm({ setOpen }: ProjectsFormProps) {
                 />
                 <FormField
                     control={form.control}
-                    name="description"
+                    name="position"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Description</FormLabel>
+                            <FormLabel>Position</FormLabel>
                             <FormControl>
-                                <Input placeholder="Description" {...field} className="w-fit" />
+                                <Input placeholder="Position Name" {...field} className="w-fit" />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -170,108 +153,7 @@ export default function ExperiencesForm({ setOpen }: ProjectsFormProps) {
                         )}
                     />
                 </div>
-                <div className="flex flex-col lg:flex-row items-center justify-start gap-4">
-                    <FormField
-                        control={form.control}
-                        name="image_preview"
-                        render={() => (
-                            <FormItem>
-                                <FormLabel>Image Preview</FormLabel>
-                                <FormControl>
-                                    <UploadFile onUploadComplete={handleImagePreviewUploadComplete} />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="image_preview"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormControl>
-                                    <Input placeholder="Image Preview URL" {...field} className="w-fit" value={imagePreviewUrl} disabled />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                </div>
-                <div className="flex flex-col lg:flex-row items-center justify-start gap-4">
-                    <FormField
-                        control={form.control}
-                        name="image_preview_secondary"
-                        render={() => (
-                            <FormItem>
-                                <FormLabel>Image Preview Secondary</FormLabel>
-                                <FormControl>
-                                    <UploadFile onUploadComplete={handleImagePreviewSecondaryUploadComplete} />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="image_preview_secondary"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormControl>
-                                    <Input placeholder="Image Preview Secondary URL" {...field} className="w-fit" value={imagePreviewSecondaryUrl} disabled />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                </div>
-                <FormField
-                    control={form.control}
-                    name="github"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormControl>
-                                <Input placeholder="Github" {...field} className="w-fit" />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="link"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormControl>
-                                <Input placeholder="Link" {...field} className="w-fit" />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="tech_stack"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormControl>
-                                <Input placeholder="Tech Stack" {...field} className="w-fit" />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="status"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormControl>
-                                <Input placeholder="Status" {...field} className="w-fit" />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
+
                 <Button type="submit">Submit</Button>
             </form>
         </Form>
