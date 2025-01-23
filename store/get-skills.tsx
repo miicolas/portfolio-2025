@@ -17,7 +17,6 @@ const useGetSkillsStore = create<Store>((set, get) => ({
                 },
             });
             const data = await response.json();
-            console.log(data);
             set(() => ({ data: data, loading: false }));
         } catch (error) {
             set(() => ({ error: (error as Error).message, loading: false }));

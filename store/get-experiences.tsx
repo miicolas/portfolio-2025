@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { Store } from "@/lib/types";
 
-const useGetProjectsStore = create<Store>((set, get) => ({
+const useGetExperiencesStore = create<Store>((set, get) => ({
     data: null,
     loading: false,
     error: null,
@@ -10,7 +10,7 @@ const useGetProjectsStore = create<Store>((set, get) => ({
         if (data) return;
         set(() => ({ loading: true }));
         try {
-            const response = await fetch("/api/get-projects", {
+            const response = await fetch("/api/get-experiences", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -24,4 +24,4 @@ const useGetProjectsStore = create<Store>((set, get) => ({
     }
 }));
 
-export { useGetProjectsStore };
+export { useGetExperiencesStore };
