@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
     Table,
     TableBody,
@@ -22,11 +22,10 @@ import {
 
 import { Button } from "@/components/ui/button"
 import { MoreHorizontal, Pencil, Trash2, Eye } from "lucide-react"
-import { useEffect } from "react"
 import { useGetProjectsStore } from "@/store/get-projects"
 import { Skeleton } from "@/components/ui/skeleton"
 import { toast } from "sonner"
-import Image from 'next/image';
+import { ProjectData } from "@/lib/types"
 
 export default function ProjectsTable() {
     const { data, loading, error, fetchData } = useGetProjectsStore()
@@ -38,7 +37,7 @@ export default function ProjectsTable() {
     if (error) {
         return (
             <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-center text-sm text-red-600">
-                Error loading skills: {error}
+                Error loading projects: {error}
             </div>
         )
     }
@@ -59,8 +58,8 @@ export default function ProjectsTable() {
             fetchData();
         }
         catch (error) {
-            console.error("Error deleting skill:", error);
-            toast.error("Failed to delete skill");
+            console.error("Error deleting project:", error);
+            toast.error("Failed to delete project");
         }
     };
 
@@ -71,7 +70,7 @@ export default function ProjectsTable() {
                     {loading ? (
                         <Skeleton className="h-4 w-48 mx-auto" />
                     ) : (
-                        `Total Skills: ${data?.content?.length || 0}`
+                        `Total Projects: ${data?.content?.length || 0}`
                     )}
                 </TableCaption>
                 <TableHeader>
@@ -79,7 +78,7 @@ export default function ProjectsTable() {
                         <TableHead className="px-2 w-[100px] font-semibold text-left">ID</TableHead>
                         <TableHead className="font-semibold text-left">Name</TableHead>
                         <TableHead className="font-semibold text-left">Description</TableHead>
-                        <TableHead className="font-semibold text-left">Logo</TableHead>
+                        <TableHead className="font-semibold text-left">Status</TableHead>
                         <TableHead className="text-left font-semibold">Actions</TableHead>
                     </TableRow>
                 </TableHeader>
@@ -95,23 +94,15 @@ export default function ProjectsTable() {
                             </TableRow>
                         ))
                     ) : (
-                        data?.content?.map((skill) => (
-                            <TableRow key={skill.id} className="group">
-                                <TableCell className="font-medium">{skill.id}</TableCell>
-                                <TableCell className="font-medium">{skill.name}</TableCell>
+                        (data?.content as ProjectData[])?.map((project: ProjectData) => (
+                            <TableRow key={project.id} className="group">
+                                <TableCell className="font-medium">{project.id}</TableCell>
+                                <TableCell className="font-medium">{project.name}</TableCell>
                                 <TableCell className="text-muted-foreground max-w-md truncate">
-                                    {skill.description}
+                                    {project.description}
                                 </TableCell>
-                                <TableCell>
-                                    <div className="w-10 h-10 rounded-lg border bg-gray-50 p-1 flex items-center justify-center">
-                                        <Image
-                                            src={skill.logo}
-                                            alt={`${skill.name} logo`}
-                                            className="max-w-full max-h-full object-contain"
-                                            width={100}
-                                            height={100}
-                                        />
-                                    </div>
+                                <TableCell className="text-muted-foreground max-w-md truncate">
+                                    {project.status}
                                 </TableCell>
                                 <TableCell className="text-left">
                                     <DropdownMenu>
@@ -132,9 +123,9 @@ export default function ProjectsTable() {
                                             </DropdownMenuItem>
                                             <DropdownMenuItem>
                                                 <Pencil className="mr-2 h-4 w-4" />
-                                                Edit Skill
+                                                Edit Project
                                             </DropdownMenuItem>
-                                            <DropdownMenuItem className="text-red-600" onClick={() => handleDelete(skill.id)}>
+                                            <DropdownMenuItem className="text-red-600" onClick={() => handleDelete(project.id)}>
                                                 <Trash2 className="mr-2 h-4 w-4" />
                                                 Delete
                                             </DropdownMenuItem>
