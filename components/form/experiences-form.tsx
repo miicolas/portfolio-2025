@@ -4,7 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { toast } from "sonner"
-
 import { Button } from "@/components/ui/button"
 import {
     Form,
@@ -19,6 +18,13 @@ import { Input } from "@/components/ui/input"
 import UploadFile from "../ui/upload-file"
 import { useState } from "react"
 
+import {
+    InputOTP,
+    InputOTPGroup,
+    InputOTPSeparator,
+    InputOTPSlot,
+} from "@/components/ui/input-otp"
+
 const formSchema = z.object({
     company: z.string().min(1, {
         message: "Company must be at least 1 characters long",
@@ -30,12 +36,8 @@ const formSchema = z.object({
     }).max(255, {
         message: "Position must be at most 255 characters long",
     }),
-    startDate: z.date().max(new Date(), {
-        message: "Start date must be in the past or today",
-    }),
-    endDate: z.date().refine(date => date >= new Date(), {
-        message: "End date must be in the future or today",
-    }),
+    startDate: z.string(),
+    endDate: z.string().optional(),
     logo: z.string().url(),
 
 
@@ -54,14 +56,20 @@ export default function ExperiencesForm({ setOpen }: ProjectsFormProps) {
         defaultValues: {
             company: "",
             position: "",
-            startDate: new Date(),
-            endDate: new Date(),
+            startDate: "",
+            endDate: "",
             logo: "",
         },
     });
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         const { company, position, startDate, endDate, logo } = values;
+
+
+        const startDateDate = startDate ? new Date(startDate) : null;
+        const endDateDate = endDate ? new Date(endDate) : null;
+        
+
         fetch("/api/add-project", {
             method: "POST",
             headers: {
@@ -70,8 +78,8 @@ export default function ExperiencesForm({ setOpen }: ProjectsFormProps) {
             body: JSON.stringify({
                 company,
                 position,
-                startDate,
-                endDate,
+                startDate : startDateDate,
+                endDate : endDateDate,
                 logo,
             }),
         })
@@ -153,6 +161,63 @@ export default function ExperiencesForm({ setOpen }: ProjectsFormProps) {
                         )}
                     />
                 </div>
+                <FormField
+                    control={form.control}
+                    name="startDate"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Start Date</FormLabel>
+                            <FormControl>
+                                <InputOTP maxLength={6} {...field}>
+                                    <InputOTPGroup>
+                                        <InputOTPSlot index={0} />
+                                        <InputOTPSlot index={1} />
+                                    </InputOTPGroup>
+                                    <InputOTPSeparator />
+                                    <InputOTPGroup>
+                                        <InputOTPSlot index={2} />
+                                        <InputOTPSlot index={3} />
+                                    </InputOTPGroup>
+                                    <InputOTPSeparator />
+                                    <InputOTPGroup>
+                                        <InputOTPSlot index={4} />
+                                        <InputOTPSlot index={5} />
+                                    </InputOTPGroup>
+                                </InputOTP>
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <FormField
+                    control={form.control}
+                    name="endDate"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>End Date</FormLabel>
+                            <FormControl>
+                                <InputOTP maxLength={4} {...field}  >
+                                    <InputOTPGroup>
+                                        <InputOTPSlot index={0} />
+                                        <InputOTPSlot index={1} />
+                                    </InputOTPGroup>
+                                    <InputOTPSeparator />
+                                    <InputOTPGroup>
+                                        <InputOTPSlot index={2} />
+                                        <InputOTPSlot index={3} />
+                                    </InputOTPGroup>
+                                    <InputOTPSeparator />
+                                    <InputOTPGroup>
+                                        <InputOTPSlot index={4} />
+                                        <InputOTPSlot index={5} />
+                                    </InputOTPGroup>
+                                </InputOTP>
+
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
 
                 <Button type="submit">Submit</Button>
             </form>
