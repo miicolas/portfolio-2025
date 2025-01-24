@@ -2,6 +2,7 @@ import { Calendar, Home, BicepsFlexed, Search, Settings } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -9,6 +10,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import Logout from "./logout";
 
 const items = [
   {
@@ -66,6 +68,9 @@ export async function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter>
+        <Logout />
+      </SidebarFooter>
       
     </Sidebar>
   );
