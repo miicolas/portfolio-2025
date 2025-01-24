@@ -134,7 +134,7 @@ export default function ExperiencesForm({ setOpen }: ProjectsFormProps) {
                         </FormItem>
                     )}
                 />
-                <div className="flex flex-col lg:flex-row items-center justify-start gap-4">
+                <div className="flex flex-col lg:flex-row lg:items-center justify-start gap-4">
                     <FormField
                         control={form.control}
                         name="logo"
@@ -196,7 +196,7 @@ export default function ExperiencesForm({ setOpen }: ProjectsFormProps) {
                         <FormItem>
                             <FormLabel>End Date</FormLabel>
                             <FormControl>
-                                <InputOTP maxLength={4} {...field}  >
+                                <InputOTP maxLength={6} {...field}  >
                                     <InputOTPGroup>
                                         <InputOTPSlot index={0} />
                                         <InputOTPSlot index={1} />
