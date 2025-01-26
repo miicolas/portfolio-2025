@@ -27,6 +27,7 @@ import { useGetSkillsStore } from "@/store/get-skills"
 import { Skeleton } from "@/components/ui/skeleton"
 import { toast } from "sonner"
 import Image from 'next/image';
+import { SkillData } from '@/lib/types';
 
 export default function SkillsTable() {
     const { data, loading, error, fetchData } = useGetSkillsStore()
@@ -95,7 +96,7 @@ export default function SkillsTable() {
                             </TableRow>
                         ))
                     ) : (
-                        data?.content?.map((skill) => (
+                        (data?.content as SkillData[])?.map((skill: SkillData) => (
                             <TableRow key={skill.id} className="group">
                                 <TableCell className="font-medium">{skill.id}</TableCell>
                                 <TableCell className="font-medium">{skill.name}</TableCell>

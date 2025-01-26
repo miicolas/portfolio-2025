@@ -1,12 +1,14 @@
 import { getSession } from "@/lib/get-session";
 import { getRole } from "@/lib/get-role";
+import { redirect } from 'next/navigation'
 
 
 export default async function Dashboard() {
 
     const session = await getSession();
     if (!session) {
-        return <div>You are not logged in.</div>;
+        redirect(`/login`);
+
     }
     const isAdmin = await getRole(session!.user.id);
 
