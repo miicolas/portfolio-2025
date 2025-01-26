@@ -27,6 +27,7 @@ import { useGetExperiencesStore } from "@/store/get-experiences"
 import { Skeleton } from "@/components/ui/skeleton"
 import { toast } from "sonner"
 import Image from 'next/image';
+import { ExperienceData } from '@/lib/types';
 
 export default function ExperiencesTable() {
     const { data, loading, error, fetchData } = useGetExperiencesStore()
@@ -95,18 +96,18 @@ export default function ExperiencesTable() {
                             </TableRow>
                         ))
                     ) : (
-                        data?.content?.map((skill) => (
-                            <TableRow key={skill.id} className="group">
-                                <TableCell className="font-medium">{skill.id}</TableCell>
-                                <TableCell className="font-medium">{skill.name}</TableCell>
+                        (data?.content as ExperienceData[])?.map((experience: ExperienceData) => (
+                            <TableRow key={experience.id} className="group">
+                                <TableCell className="font-medium">{experience.id}</TableCell>
+                                <TableCell className="font-medium">{experience.company}</TableCell>
                                 <TableCell className="text-muted-foreground max-w-md truncate">
-                                    {skill.description}
+                                    {experience.position}
                                 </TableCell>
                                 <TableCell>
                                     <div className="w-10 h-10 rounded-lg border bg-gray-50 p-1 flex items-center justify-center">
                                         <Image
-                                            src={skill.logo}
-                                            alt={`${skill.name} logo`}
+                                            src={experience.logo}
+                                            alt={`${experience.company} logo`}
                                             className="max-w-full max-h-full object-contain"
                                             width={100}
                                             height={100}
@@ -134,7 +135,7 @@ export default function ExperiencesTable() {
                                                 <Pencil className="mr-2 h-4 w-4" />
                                                 Edit Experience
                                             </DropdownMenuItem>
-                                            <DropdownMenuItem className="text-red-600" onClick={() => handleDelete(skill.id)}>
+                                            <DropdownMenuItem className="text-red-600" onClick={() => handleDelete(Number(experience.id))}>
                                                 <Trash2 className="mr-2 h-4 w-4" />
                                                 Delete
                                             </DropdownMenuItem>

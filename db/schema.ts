@@ -31,7 +31,7 @@ export const experienceTable = mysqlTable('experience_table', {
     company: varchar({ length: 255 }).notNull(),
     position: varchar({ length: 255 }).notNull(),
     startDate: date().notNull(),
-    endDate: date().notNull(),
+    endDate: date(),
     logo : varchar({ length: 255 }).notNull(),
 });
 

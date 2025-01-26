@@ -4,10 +4,14 @@ import { useScroll, motion, useSpring } from "motion/react";
 import { useRef, useState, useEffect } from "react";
 import ExperienceHeader from "../experience/experience-header";
 import ExperienceList from "../experience/experience-list";
+import { useGetExperiencesStore } from "@/store/get-experiences";
+import { ExperienceData } from "@/lib/types";
 
 export default function Experience() {
-    const containerRef = useRef(null as HTMLDivElement | null);
+    const containerRef = useRef<HTMLDivElement | null>(null);
     const [isMobile, setIsMobile] = useState(false);
+
+    const { data, loading, error, fetchData } = useGetExperiencesStore();
 
     useEffect(() => {
         const handleResize = () => {
@@ -18,40 +22,9 @@ export default function Experience() {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    const experience = [
-        {
-            id: "1",
-            company: "La 404 Devinci",
-            position: "Président",
-            startDate: "August 2024",
-            endDate: "Present",
-            image: "https://s3-alpha-sig.figma.com/img/6dbf/88f5/36ddc416efe5fe42c4a0cf3ed50a53de?Expires=1737936000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=SjRWzUbowtsh8uzQ9rjnbU1WgyDd-fkSQIB0UeYNxbbeEWGjQ1wYBuCPC4s6aNopiZcTWw-LCCsxjiQU~vbb4QbSC2v~s7n-fPZgeQpQcAEAdsIhwlypmWDoq0tIXT4-sqSvrl1x3EMoKC7SWvc~sjTVxXIX4FjtUCTbSOPpkC~BuYB-Kit5Npx7IB1aPsVKqoZSSO9NrJsHhlv5f3Mx2XQcRzFQMRLaBD8Gj0f4SQn9nLvrCx52dqzg16XNTw8OSqIWANJKVioVyPsApq7a085mTfsWIDGjAuo7F-MDmYgz-oxMOZLB1l0HeH67q4IOOllZYH65UHOMDgcpKz8e4w__"
-        },
-        {
-            id: "2",
-            company: "PULV",
-            position: "Moodle Administrator",
-            startDate: "September 2024",
-            endDate: "Present",
-            image: "https://www.solutions-numeriques.com/wp-content/uploads/2023/03/leonard.jpg"
-        },
-        {
-            id: "3",
-            company: "Project grant - IIM",
-            position: "Developer",
-            startDate: "October 2024",
-            endDate: "December 2024",
-            image: "https://s3-alpha-sig.figma.com/img/6dbf/88f5/36ddc416efe5fe42c4a0cf3ed50a53de?Expires=1737936000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=SjRWzUbowtsh8uzQ9rjnbU1WgyDd-fkSQIB0UeYNxbbeEWGjQ1wYBuCPC4s6aNopiZcTWw-LCCsxjiQU~vbb4QbSC2v~s7n-fPZgeQpQcAEAdsIhwlypmWDoq0tIXT4-sqSvrl1x3EMoKC7SWvc~sjTVxXIX4FjtUCTbSOPpkC~BuYB-Kit5Npx7IB1aPsVKqoZSSO9NrJsHhlv5f3Mx2XQcRzFQMRLaBD8Gj0f4SQn9nLvrCx52dqzg16XNTw8OSqIWANJKVioVyPsApq7a085mTfsWIDGjAuo7F-MDmYgz-oxMOZLB1l0HeH67q4IOOllZYH65UHOMDgcpKz8e4w__"
-        },
-        {
-            id: "4",
-            company: "Cross-functional project - IIM",
-            position: "Project Manager",
-            startDate: "March 2024",
-            endDate: "May 2024",
-            image: "https://s3-alpha-sig.figma.com/img/6dbf/88f5/36ddc416efe5fe42c4a0cf3ed50a53de?Expires=1737936000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=SjRWzUbowtsh8uzQ9rjnbU1WgyDd-fkSQIB0UeYNxbbeEWGjQ1wYBuCPC4s6aNopiZcTWw-LCCsxjiQU~vbb4QbSC2v~s7n-fPZgeQpQcAEAdsIhwlypmWDoq0tIXT4-sqSvrl1x3EMoKC7SWvc~sjTVxXIX4FjtUCTbSOPpkC~BuYB-Kit5Npx7IB1aPsVKqoZSSO9NrJsHhlv5f3Mx2XQcRzFQMRLaBD8Gj0f4SQn9nLvrCx52dqzg16XNTw8OSqIWANJKVioVyPsApq7a085mTfsWIDGjAuo7F-MDmYgz-oxMOZLB1l0HeH67q4IOOllZYH65UHOMDgcpKz8e4w__"
-        },
-    ];
+    useEffect(() => {
+        fetchData();
+    }, [fetchData]);
 
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -64,8 +37,9 @@ export default function Experience() {
         restDelta: 0.2
     });
 
-    return (
+    console.log(data);
 
+    return (
         <div className="py-16 max-w-4xl mx-auto space-y-16" id="experience">
             <ExperienceHeader />
 
@@ -77,9 +51,8 @@ export default function Experience() {
                         style={{ scaleY: scaleProgress }}
                     />
                 </div>
-                <ExperienceList experience={experience} isMobile={isMobile} />
+                <ExperienceList experience={data?.content as ExperienceData[]} isMobile={isMobile} />
             </div>
-
         </div>
     );
 }

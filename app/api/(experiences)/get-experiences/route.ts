@@ -1,11 +1,11 @@
 import { NextResponse} from "next/server";
 import { db } from "@/db";
-import { projectsTable } from "@/db/schema";
+import { experienceTable } from "@/db/schema";
 
 export async function GET() {
     try {
 
-        const experiences = await db.select().from(projectsTable);
+        const experiences = await db.select().from(experienceTable);
 
         return NextResponse.json({
             message: "Experiences getting successfully",

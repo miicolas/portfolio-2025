@@ -17,13 +17,13 @@ import {
 import { Input } from "@/components/ui/input"
 import UploadFile from "../ui/upload-file"
 import { useState } from "react"
-
 import {
     InputOTP,
     InputOTPGroup,
     InputOTPSeparator,
     InputOTPSlot,
 } from "@/components/ui/input-otp"
+import { parseDate } from "@/lib/utils"
 
 const formSchema = z.object({
     company: z.string().min(1, {
@@ -36,20 +36,28 @@ const formSchema = z.object({
     }).max(255, {
         message: "Position must be at most 255 characters long",
     }),
-    startDate: z.string(),
-    endDate: z.string().optional(),
+    startDate: z.string().refine(val => {
+        const date = parseDate(val);
+        return !!date && val.length === 6 && !isNaN(date.getTime());
+    }, {
+        message: "Invalid start date (DDMMYY)",
+    }),
+    endDate: z.string().optional().refine(val => {
+        if (!val) return true;
+        const date = parseDate(val);
+        return val.length === 6 && !!date && !isNaN(date.getTime());
+    }, {
+        message: "Invalid end date (DDMMYY)",
+    }),
     logo: z.string().url(),
-
-
 })
 
-interface ProjectsFormProps {
+interface ExperiencesFormProps {
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function ExperiencesForm({ setOpen }: ProjectsFormProps) {
+export default function ExperiencesForm({ setOpen }: ExperiencesFormProps) {
     const [logoUrl, setLogoUrl] = useState("");
-
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -62,15 +70,15 @@ export default function ExperiencesForm({ setOpen }: ProjectsFormProps) {
         },
     });
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
+    async function onSubmit(values: z.infer<typeof formSchema>) {
         const { company, position, startDate, endDate, logo } = values;
 
+        const startDateDate = parseDate(startDate);
+        const endDateDate = endDate ? parseDate(endDate) : null;
 
-        const startDateDate = startDate ? new Date(startDate) : null;
-        const endDateDate = endDate ? new Date(endDate) : null;
-        
+        console.log(startDateDate, endDateDate);
 
-        fetch("/api/add-project", {
+        await fetch("/api/add-experience", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -78,30 +86,27 @@ export default function ExperiencesForm({ setOpen }: ProjectsFormProps) {
             body: JSON.stringify({
                 company,
                 position,
-                startDate : startDateDate,
-                endDate : endDateDate,
+                startDate: startDateDate?.toISOString(),
+                endDate: endDateDate?.toISOString(),
                 logo,
             }),
         })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data);
-                toast.success("Project added successfully");
-
-                form.reset();
-                setOpen(false);
-            })
-            .catch((error) => {
-                console.error("Error adding project:", error);
-                toast.error("Failed to add project");
-            });
+        .then((response) => response.json())
+        .then((data) => {
+            toast.success("Experience added successfully");
+            form.reset();
+            setOpen(false);
+        })
+        .catch((error) => {
+            console.error("Error adding experience:", error);
+            toast.error("Failed to add experience");
+        });
     }
 
     const handleLogoUploadComplete = (url: string) => {
         setLogoUrl(url);
         form.setValue("logo", url);
     };
-
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
@@ -112,7 +117,7 @@ export default function ExperiencesForm({ setOpen }: ProjectsFormProps) {
                         <FormItem>
                             <FormLabel>Company Name</FormLabel>
                             <FormControl>
-                                <Input placeholder="Project Name" {...field} className="w-fit" />
+                                <Input placeholder="Company Name" {...field} className="w-fit" />
                             </FormControl>
                             <FormDescription>
                                 This is your public display name.
@@ -166,7 +171,7 @@ export default function ExperiencesForm({ setOpen }: ProjectsFormProps) {
                     name="startDate"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Start Date</FormLabel>
+                            <FormLabel>Start Date (DDMMYY)</FormLabel>
                             <FormControl>
                                 <InputOTP maxLength={6} {...field}>
                                     <InputOTPGroup>
@@ -194,9 +199,14 @@ export default function ExperiencesForm({ setOpen }: ProjectsFormProps) {
                     name="endDate"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>End Date</FormLabel>
+                            <FormLabel>End Date (DDMMYY) - Optional</FormLabel>
                             <FormControl>
-                                <InputOTP maxLength={6} {...field}  >
+                                <InputOTP 
+                                    maxLength={6} 
+                                    {...field} 
+                                    value={field.value || ""}
+                                    onChange={value => field.onChange(value || undefined)}
+                                >
                                     <InputOTPGroup>
                                         <InputOTPSlot index={0} />
                                         <InputOTPSlot index={1} />
@@ -212,7 +222,6 @@ export default function ExperiencesForm({ setOpen }: ProjectsFormProps) {
                                         <InputOTPSlot index={5} />
                                     </InputOTPGroup>
                                 </InputOTP>
-
                             </FormControl>
                             <FormMessage />
                         </FormItem>

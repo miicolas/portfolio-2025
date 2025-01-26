@@ -32,6 +32,15 @@ export interface ProjectData {
     status: string;
 }
 
+export interface ExperienceData {
+    id: string;
+    company: string;
+    position: string;
+    startDate: Date;
+    endDate: Date | null;
+    logo: string;
+}
+
 export interface ContactData {
     id?: string;
     name: string;
@@ -43,7 +52,7 @@ export interface ContactData {
 
 export interface ResponseApi {
     message: string;
-    content: SkillData[] | ProjectData[] | null;
+    content: SkillData[] | ProjectData[] | ExperienceData[] | null;
 }
 
 export interface Store {

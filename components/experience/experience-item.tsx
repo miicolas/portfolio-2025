@@ -3,6 +3,7 @@ import { ExternalLink } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Separator } from "../ui/separator";
+import { formatISODate } from "@/lib/utils";
 
 
 
@@ -11,10 +12,11 @@ interface ExperienceItemProps {
         id: string;
         company: string;
         position: string;
-        startDate: string;
-        endDate: string;
-        image: string;
-    }[];
+        startDate: Date;
+        endDate: Date | null;
+        logo: string;
+
+    };
     index: number;
     isMobile: boolean;
 }
@@ -24,7 +26,7 @@ export default function ExperienceItem({ experience, index, isMobile }: Experien
     const isLeft = index % 2 === 0;
     return (
         <motion.div
-            key={experience[index].id}
+            key={experience.id}
             initial={{ opacity: 0, x: isMobile ? 50 : isLeft ? -50 : 50 }}
             whileInView={{
                 opacity: 1,
@@ -65,20 +67,20 @@ export default function ExperienceItem({ experience, index, isMobile }: Experien
                             <div className="flex items-center space-x-3">
 
                                 <h3 className="text-xl">
-                                    {experience[index].company}
+                                    {experience.company}
                                 </h3>
                             </div>
                         </div>
 
                         <p className="text-neutral-800 dark:text-neutral-50 text-lg font-medium text-balance">
-                            {experience[index].position}
+                            {experience.position}
                         </p>
                         <Separator className="w-16 group-hover:w-24 transition-all duration-200 ease-in-out" />
                         <div className="flex justify-between space-x-2 text-neutral-600">
                             <p className="text-sm font-light">
-                                {experience[index].startDate} - {experience[index].endDate}
+                                {formatISODate(experience.startDate)} - {experience.endDate ? formatISODate(experience.endDate) : "Present"}
                             </p>
-                            <Link href={`/experience/${experience[index].id}`} className="group-[button] bg-transparent text-neutral-500 dark:text-neutral-50 group-hover:text-neutral-900 rounded-full group-hover:bg-neutral-200 p-2 dark:group-hover:text-neutral-300 transition-all duration-200 ease-in-out">
+                            <Link href={`/experience/${experience.id}`} className="group-[button] bg-transparent text-neutral-500 dark:text-neutral-50 group-hover:text-neutral-900 rounded-full group-hover:bg-neutral-200 p-2 dark:group-hover:text-neutral-300 transition-all duration-200 ease-in-out">
                                 <ExternalLink strokeWidth={1} size={24} className="text-neutral-500 dark:text-neutral-50 group-hover:text-neutral-900 dark:group-hover:text-neutral-300 transition-all duration-200 ease-in-out" />
                             </Link>
 
@@ -110,8 +112,8 @@ export default function ExperienceItem({ experience, index, isMobile }: Experien
                 >
                     <div className="relative">
                         <Image
-                            src={experience[index].image}
-                            alt={`${experience[index].company} logo`}
+                            src={experience.logo}
+                            alt={`${experience.company} logo`}
                             width={140}
                             height={140}
                             className="rounded-lg shadow-lg"

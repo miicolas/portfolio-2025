@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { db } from "@/db";
-import { skillsTable } from "@/db/schema";
+import { experienceTable } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
 export async function DELETE(req: Request) {
@@ -9,8 +9,8 @@ export async function DELETE(req: Request) {
     const { id } = body;
 
     const experience = await db
-        .delete(skillsTable)
-        .where(eq(skillsTable.id, id));
+        .delete(experienceTable)
+        .where(eq(experienceTable.id, id));
 
     return NextResponse.json({ 
       message: "Experience deleted successfully",
