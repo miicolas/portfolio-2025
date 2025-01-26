@@ -41,3 +41,17 @@ export function formatISODate(isoString: Date) {
   const date = new Date(isoString);
   return formatDate(date);
 }
+
+export async function deleteImage(fileUrl: string) {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/uploadthing/delete`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ fileUrl })
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to delete image");
+  }
+};
