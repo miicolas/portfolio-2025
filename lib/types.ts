@@ -62,3 +62,6 @@ export interface Store {
     fetchData: () => Promise<void>;
 }
 
+export interface SkillsFormProps {
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}

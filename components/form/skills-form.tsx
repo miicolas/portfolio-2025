@@ -18,6 +18,9 @@ import {
 import { Input } from "@/components/ui/input"
 import UploadFile from "../ui/upload-file"
 import { useState } from "react"
+import { useRouter } from 'next/router';
+import { SkillsFormProps } from "@/lib/types";
+
 
 const formSchema = z.object({
     tech_name: z.string().min(2, {
@@ -30,11 +33,10 @@ const formSchema = z.object({
     logo: z.string().url().optional(),
 })
 
-interface SkillsFormProps {
-    setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
 export default function SkillsForm({ setOpen }: SkillsFormProps) {
+
+    const router = useRouter();
+
     const [logoUrl, setLogoUrl] = useState("");
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -61,11 +63,10 @@ export default function SkillsForm({ setOpen }: SkillsFormProps) {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 toast.success("Skill added successfully");
-
                 form.reset();
                 setOpen(false);
+                router.reload();
 
             })
             .catch((error) => {
