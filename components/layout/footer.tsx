@@ -13,7 +13,7 @@ export default function Footer() {
     ]
 
     return (
-        <div className="bg-neutral-50 dark:bg-neutral-900 w-full h-fit pt-16 pb-8">
+        <div className="bg-neutral-50 dark:bg-neutral-900 w-full h-fit pt-16 pb-16 lg:pb-8">
             <div className="flex justify-between items-center">
                 <p className="text-center text-balance text-2xl font-light leading-5">@nicolas-becharat</p>
                 <div className="flex gap-4 items-end">
