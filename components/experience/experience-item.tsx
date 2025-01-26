@@ -110,15 +110,15 @@ export default function ExperienceItem({ experience, index, isMobile }: Experien
                     }}
                     viewport={{ once: true }}
                 >
-                    <div className="relative">
+                    <div className="relative aspect-square">
                         <Image
                             src={experience.logo}
                             alt={`${experience.company} logo`}
                             width={140}
                             height={140}
-                            className="rounded-lg shadow-lg"
+                            className="rounded-lg shadow-lg aspect-square object-cover"
                         />
-                        <div className="absolute inset-0 bg-indigo-500 opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-lg" />
+                        <div className="absolute inset-0 bg-indigo-500 opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-lg aspect-square object-fill" />
                     </div>
                 </motion.div>
             </motion.div>
