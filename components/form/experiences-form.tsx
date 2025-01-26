@@ -25,6 +25,7 @@ import {
 } from "@/components/ui/input-otp"
 import { parseDate } from "@/lib/utils"
 
+
 const formSchema = z.object({
     company: z.string().min(1, {
         message: "Company must be at least 1 characters long",
@@ -57,6 +58,8 @@ interface ExperiencesFormProps {
 }
 
 export default function ExperiencesForm({ setOpen }: ExperiencesFormProps) {
+
+
     const [logoUrl, setLogoUrl] = useState("");
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -75,8 +78,6 @@ export default function ExperiencesForm({ setOpen }: ExperiencesFormProps) {
 
         const startDateDate = parseDate(startDate);
         const endDateDate = endDate ? parseDate(endDate) : null;
-
-        console.log(startDateDate, endDateDate);
 
         await fetch("/api/add-experience", {
             method: "POST",

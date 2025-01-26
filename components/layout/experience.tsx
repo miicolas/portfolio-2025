@@ -6,6 +6,7 @@ import ExperienceHeader from "../experience/experience-header";
 import ExperienceList from "../experience/experience-list";
 import { useGetExperiencesStore } from "@/store/get-experiences";
 import { ExperienceData } from "@/lib/types";
+import { Skeleton } from "../ui/skeleton";
 
 export default function Experience() {
     const containerRef = useRef<HTMLDivElement | null>(null);
@@ -37,7 +38,7 @@ export default function Experience() {
         restDelta: 0.2
     });
 
-    console.log(data);
+
 
     return (
         <div className="py-16 max-w-4xl mx-auto space-y-16" id="experience">
@@ -51,7 +52,12 @@ export default function Experience() {
                         style={{ scaleY: scaleProgress }}
                     />
                 </div>
-                <ExperienceList experience={data?.content as ExperienceData[]} isMobile={isMobile} />
+
+                {loading ? (
+                    <Skeleton className="h-32 w-full" />
+                ) : (
+                    <ExperienceList experience={data?.content as ExperienceData[]} isMobile={isMobile} />
+                )}
             </div>
         </div>
     );
