@@ -1,8 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { MultiSelect } from "@/components/layout/multi-select";
 import { Cat, Dog, Fish, Rabbit, Turtle } from "lucide-react";
+import ListProjects from "./_projects/list-projects";
+
 
 const frameworksList = [
   { value: "react", label: "React", icon: Turtle },
@@ -11,10 +13,11 @@ const frameworksList = [
   { value: "svelte", label: "Svelte", icon: Rabbit },
   { value: "ember", label: "Ember", icon: Fish },
 ];
+
+
 export default function Projects() {
 
-  const [selectedFrameworks, setSelectedFrameworks] = useState<string[]>(["react", "angular"]);
-
+  const [selectedFrameworks, setSelectedFrameworks] = useState<string[]>([]);
 
   return (
     <>
@@ -28,6 +31,8 @@ export default function Projects() {
         animation={2}
         maxCount={5}
       />
+      <ListProjects />
+
 
     </>
   );

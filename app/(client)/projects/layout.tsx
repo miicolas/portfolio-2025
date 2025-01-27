@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
 
   return (
-    <main className="max-w-7xl mx-auto">
+    <main className="max-w-7xl mx-auto min-h-screen">
       <Header />
       {children}
       <Footer />
