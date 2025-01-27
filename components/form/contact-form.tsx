@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -42,19 +43,35 @@ export default function ContactForm() {
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
+    try {
+
+      const { message, email, subject, name } = values;
+
     fetch("/api/send", {
       method: "POST",
       body: JSON.stringify({
-        subject: values.subject,
-        name: values.name,
-        message: values.message.trim(),
-        email: values.email,
+        subject: subject,
+        name: name,
+        message: message.trim(),
+        email: email,
       }),
       headers: {
         "Content-Type": "application/json",
       },
-    })
+      })
+      .then((response) => response.json())
+      .then(() => {
+        toast.success("Message sent successfully");
+        form.reset();
+      })
+      .catch((error) => {
+        console.error("Error sending message:", error);
+        toast.error("Failed to send message");
+      });
+    } catch (error) {
+      console.error("Error sending message:", error);
+      toast.error("Failed to send message");
+    }
   }
 
   return (

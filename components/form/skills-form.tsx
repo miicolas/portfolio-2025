@@ -62,7 +62,7 @@ export default function SkillsForm({ setOpen }: SkillsFormProps) {
             }),
         })
             .then((response) => response.json())
-            .then((data) => {
+            .then(() => {
                 toast.success("Skill added successfully");
                 form.reset();
                 setOpen(false);

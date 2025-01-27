@@ -83,10 +83,8 @@ export default function ProjectsForm({ setOpen }: ProjectsFormProps) {
             }),
         })
             .then((response) => response.json())
-            .then((data) => {
-                console.log(data);
+            .then(() => {
                 toast.success("Project added successfully");
-
                 form.reset();
                 setOpen(false);
             })

@@ -93,7 +93,7 @@ export default function ExperiencesForm({ setOpen }: ExperiencesFormProps) {
             }),
         })
         .then((response) => response.json())
-        .then((data) => {
+        .then(() => {
             toast.success("Experience added successfully");
             form.reset();
             setOpen(false);

@@ -49,7 +49,7 @@ export default function RootLayout({
         className={`${dx_Bloop.variable} ${neueMontreal.className} antialiased bg-neutral-50 text-neutral-900 dark:bg-neutral-900 dark:text-neutral-50 p-4 w-full`}
       >
         <ScrollSmooth duration={1.2}>
-          <main>{children}</main>
+          {children}
           <Toaster />
         </ScrollSmooth>
       </body>

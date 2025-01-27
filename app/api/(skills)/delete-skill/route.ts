@@ -23,7 +23,7 @@ export async function DELETE(req: Request) {
 
     try {
       await deleteImage(checkIfSkillExists[0].logo);
-    } catch (error) {
+    } catch {
       return NextResponse.json({
         message: "Failed to delete image",
         error: "Failed to delete image"

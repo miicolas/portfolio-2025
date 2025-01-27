@@ -26,7 +26,7 @@ export async function DELETE(req: Request) {
       await deleteImage(checkIfProjectExists[0].image_preview);
       await deleteImage(checkIfProjectExists[0].image_preview_secondary);
       await deleteImage(checkIfProjectExists[0].logo);
-    } catch (error) {
+    } catch {
       return NextResponse.json({
         message: "Failed to delete images",
         error: "Failed to delete images"

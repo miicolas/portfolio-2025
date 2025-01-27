@@ -1,13 +1,10 @@
-// src/components/multi-select.tsx
-
-import * as React from "react";
+import React, { useState } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import {
   CheckIcon,
   XCircle,
   ChevronDown,
   XIcon,
-  WandSparkles,
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -50,7 +47,7 @@ const multiSelectVariants = cva(
 
 interface MultiSelectProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof multiSelectVariants> {
+  VariantProps<typeof multiSelectVariants> {
   options: {
     label: string;
     value: string;
@@ -62,7 +59,6 @@ interface MultiSelectProps
   animation?: number;
   maxCount?: number;
   modalPopover?: boolean;
-  asChild?: boolean;
   className?: string;
 }
 
@@ -80,16 +76,14 @@ export const MultiSelect = React.forwardRef<
       animation = 0,
       maxCount = 3,
       modalPopover = false,
-      asChild = false,
       className,
       ...props
     },
     ref
   ) => {
     const [selectedValues, setSelectedValues] =
-      React.useState<string[]>(defaultValue);
-    const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
-    const [isAnimating, setIsAnimating] = React.useState(false);
+      useState<string[]>(defaultValue);
+    const [isPopoverOpen, setIsPopoverOpen] = useState<boolean>(false);
 
     const handleInputKeyDown = (
       event: React.KeyboardEvent<HTMLInputElement>
@@ -164,7 +158,6 @@ export const MultiSelect = React.forwardRef<
                         key={value}
                         className={cn(
                           "bg-neutral-300 rounded-full p-2 flex items-center text-foreground border-foreground/1 hover:bg-transparent",
-                          isAnimating ? "animate-bounce" : "",
                           multiSelectVariants({ variant })
                         )}
                         style={{ animationDuration: `${animation}s` }}
@@ -187,7 +180,7 @@ export const MultiSelect = React.forwardRef<
                     <div
                       className={cn(
                         "bg-transparent text-foreground border-foreground/1 hover:bg-transparent",
-                        isAnimating ? "animate-bounce" : "",
+
                         multiSelectVariants({ variant })
                       )}
                       style={{ animationDuration: `${animation}s` }}

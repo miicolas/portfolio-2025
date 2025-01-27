@@ -5,7 +5,7 @@ import { ContactData } from "@/lib/types";
 let lastNotificationTime = 0;
 const RATE_LIMIT_DELAY = 60 * 1000;
 
-export async function SEND_NOTIFICATION({ subject, name, message, email }: ContactData) {
+export async function SEND_NOTIFICATION({ subject, name, messageCleaned, email }: ContactData) {
     const currentTime = Date.now();
 
     if (currentTime - lastNotificationTime < RATE_LIMIT_DELAY) {
@@ -23,7 +23,7 @@ export async function SEND_NOTIFICATION({ subject, name, message, email }: Conta
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ content: `**${subject}**\n\n**Name:** ${name}\n**Email:** ${email}\n**Message:** ${message}\n\n@here` })
+            body: JSON.stringify({ content: `**${subject}**\n\n**Name:** ${name}\n**Email:** ${email}\n**Message:** ${messageCleaned}\n\n@here` })
         });
 
         if (response.ok) {

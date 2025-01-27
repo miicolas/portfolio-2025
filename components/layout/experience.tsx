@@ -12,7 +12,7 @@ export default function Experience() {
     const containerRef = useRef<HTMLDivElement | null>(null);
     const [isMobile, setIsMobile] = useState(false);
 
-    const { data, loading, error, fetchData } = useGetExperiencesStore();
+    const { data, loading, fetchData } = useGetExperiencesStore();
 
     useEffect(() => {
         const handleResize = () => {
