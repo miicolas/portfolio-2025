@@ -7,15 +7,15 @@ export async function POST(req: Request) {
 
   try {
 
-    let { message, email, subject, name } = await req.json();
+    const { message, email, subject, name } = await req.json();
 
 
-    message = message
+    const messageCleaned = message
       .replace(/[\n\t@#]/g, ' ')
       .replace(/\s+/g, ' ')
       .trim();
 
-    const response = await SEND_NOTIFICATION({ message, email, subject, name });
+    const response = await SEND_NOTIFICATION({ messageCleaned, email, subject, name });
 
     if (!response.ok) {
       const errorData = await response.json();

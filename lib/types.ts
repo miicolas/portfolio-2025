@@ -45,7 +45,7 @@ export interface ContactData {
     id?: string;
     name: string;
     email: string;
-    message: string;
+    messageCleaned: string;
     subject: string;
 }
 
