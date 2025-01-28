@@ -17,7 +17,7 @@ export default function ProjectsDialog({ open, setOpen }: { open: boolean, setOp
             <DialogTrigger asChild>
                 <Button variant="outline">Create Project</Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-md">
+            <DialogContent className="sm:max-w-md overflow-y-scroll max-h-screen">
                 <DialogHeader>
                     <DialogTitle>Create project</DialogTitle>
                 </DialogHeader>

@@ -55,3 +55,10 @@ export async function deleteImage(fileUrl: string) {
     throw new Error("Failed to delete image");
   }
 };
+
+export function slugify(text: string) {
+  return text
+    .toLowerCase()
+    .replace(/ /g, "-")
+    .replace(/[^a-z0-9-]/g, "");
+}

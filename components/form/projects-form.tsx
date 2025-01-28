@@ -30,13 +30,11 @@ const formSchema = z.object({
     }).max(255, {
         message: "Description must be at most 255 characters long",
     }),
-    logo: z.string().url(),
     link: z.string().url().optional(),
     github: z.string().url().optional(),
-    image_preview: z.string().url(),
-    image_preview_secondary: z.string().url(),
+    image_preview: z.string().url().optional(),
+    image_preview_secondary: z.string().url().optional(),
     tech_stack: z.string().optional(),
-    status: z.string().optional(),
 })
 
 interface ProjectsFormProps {
@@ -44,7 +42,6 @@ interface ProjectsFormProps {
 }
 
 export default function ProjectsForm({ setOpen }: ProjectsFormProps) {
-    const [logoUrl, setLogoUrl] = useState("");
     const [imagePreviewUrl, setImagePreviewUrl] = useState("");
     const [imagePreviewSecondaryUrl, setImagePreviewSecondaryUrl] = useState("");
 
@@ -53,18 +50,16 @@ export default function ProjectsForm({ setOpen }: ProjectsFormProps) {
         defaultValues: {
             name: "",
             description: "",
-            logo: "",
-            link: "",
-            github: "",
-            image_preview: "",
-            image_preview_secondary: "",
-            tech_stack: "",
-            status: "",
+            link: undefined,
+            github: undefined,
+            image_preview: undefined,
+            image_preview_secondary: undefined,
+            tech_stack: undefined,
         },
     });
 
     function onSubmit(values: z.infer<typeof formSchema>) {
-        const { name, description, logo, image_preview, image_preview_secondary, link, github, tech_stack, status } = values;
+        const { name, description, image_preview, image_preview_secondary, link, github, tech_stack } = values;
         fetch("/api/add-project", {
             method: "POST",
             headers: {
@@ -72,14 +67,12 @@ export default function ProjectsForm({ setOpen }: ProjectsFormProps) {
             },
             body: JSON.stringify({
                 name,
-                logo,
                 description,
                 github,
                 link,
                 image_preview,
                 image_preview_secondary,
                 tech_stack,
-                status,
             }),
         })
             .then((response) => response.json())
@@ -93,11 +86,6 @@ export default function ProjectsForm({ setOpen }: ProjectsFormProps) {
                 toast.error("Failed to add project");
             });
     }
-
-    const handleLogoUploadComplete = (url: string) => {
-        setLogoUrl(url);
-        form.setValue("logo", url);
-    };
 
     const handleImagePreviewUploadComplete = (url: string) => {
         setImagePreviewUrl(url);
@@ -141,33 +129,7 @@ export default function ProjectsForm({ setOpen }: ProjectsFormProps) {
                         </FormItem>
                     )}
                 />
-                <div className="flex flex-col lg:flex-row items-center justify-start gap-4">
-                    <FormField
-                        control={form.control}
-                        name="logo"
-                        render={() => (
-                            <FormItem>
-                                <FormLabel>Logo</FormLabel>
-                                <FormControl>
-                                    <UploadFile onUploadComplete={handleLogoUploadComplete} />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="logo"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormControl>
-                                    <Input placeholder="Logo URL" {...field} className="w-fit" value={logoUrl} disabled />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                </div>
+                
                 <div className="flex flex-col lg:flex-row items-center justify-start gap-4">
                     <FormField
                         control={form.control}
@@ -253,18 +215,6 @@ export default function ProjectsForm({ setOpen }: ProjectsFormProps) {
                         <FormItem>
                             <FormControl>
                                 <Input placeholder="Tech Stack" {...field} className="w-fit" />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="status"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormControl>
-                                <Input placeholder="Status" {...field} className="w-fit" />
                             </FormControl>
                             <FormMessage />
                         </FormItem>

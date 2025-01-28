@@ -1,4 +1,4 @@
-import { int, mysqlTable, serial, varchar, text, timestamp, boolean, mysqlEnum, date } from "drizzle-orm/mysql-core";
+import { mysqlTable, serial, varchar, text, timestamp, boolean, mysqlEnum, date } from "drizzle-orm/mysql-core";
 
 
 export const Role = mysqlEnum('role', ['USER', 'ADMIN']);
@@ -11,18 +11,15 @@ export const skillsTable = mysqlTable('skills_table', {
 
 });
 
-
 export const projectsTable = mysqlTable('projects_table', {
     id: serial().primaryKey(),
     name: varchar({ length: 255 }).notNull(),
-    logo: varchar({ length: 255 }).notNull(),
     description: varchar({ length: 255 }).notNull(),
     link: varchar({ length: 255 }),
     github: varchar({ length: 255 }),
-    image_preview: varchar({ length: 255 }).notNull(),
-    image_preview_secondary: varchar({ length: 255 }).notNull(),
+    image_preview: varchar({ length: 255 }),
+    image_preview_secondary: varchar({ length: 255 }),
     tech_stack: varchar({ length: 255 }),
-    status: varchar({ length: 255 }),
 
 });
 
@@ -32,7 +29,7 @@ export const experienceTable = mysqlTable('experience_table', {
     position: varchar({ length: 255 }).notNull(),
     startDate: date().notNull(),
     endDate: date(),
-    logo : varchar({ length: 255 }).notNull(),
+    logo: varchar({ length: 255 }).notNull(),
 });
 
 export const user = mysqlTable("user", {

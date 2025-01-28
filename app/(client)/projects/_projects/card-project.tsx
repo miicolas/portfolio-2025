@@ -5,7 +5,6 @@ import { MoveDiagonal } from "lucide-react"
 import Link from "next/link"
 import { ProjectData } from "@/lib/types"
 
-
 export default function CardProject({ name, description, image_preview, image_preview_secondary }: ProjectData) {
 
     return (
@@ -25,11 +24,11 @@ export default function CardProject({ name, description, image_preview, image_pr
                     </Link>
                 </div>
             </div>
-            <div
-                className="w-full h-full flex justify-center items-center relative z-10"
-            >
+            <div className="w-full h-full flex justify-center items-center relative z-10">
+                
+                {image_preview && (
                 <Card
-                    className={`absolute top-10 lg:top-0 -left-20 w-fit h-fit rotate-6 transition-all duration-300 ease-in-out shadow-sm group-hover:shadow-xl group-hover:shadow-indigo-200 group-hover:translate-x-4 group-hover:-translate-y-4 `}
+                    className={`absolute top-10 lg:top-0 -left-20 w-fit h-fit rotate-6 transition-all duration-300 ease-in-out shadow-sm group-hover:shadow-xl group-hover:shadow-indigo-200 group-hover:translate-x-4 group-hover:-translate-y-4`}
                 >
                     <Image
                         src={image_preview}
@@ -39,19 +38,21 @@ export default function CardProject({ name, description, image_preview, image_pr
                         className="rounded-lg h-64 w-auto object-cover"
                     />
                 </Card>
-                <Card
-                    className={`absolute top-0 -right-20 w-fit h-fit -rotate-3 transition-all duration-300 ease-in-out shadow-sm group-hover:shadow-xl group-hover:shadow-indigo-200 group-hover:-translate-x-4 group-hover:-translate-y-4 hidden lg:block`}
-                >
-                    <Image
-                        src={image_preview_secondary}
-                        alt="Project image 2"
-                        width={1080}
-                        height={320}
-                        className="rounded-lg h-64 w-auto object-cover"
-                    />
-                </Card>
+                )}
+                {image_preview_secondary && (
+                    <Card
+                        className={`absolute top-0 -right-20 w-fit h-fit -rotate-3 transition-all duration-300 ease-in-out shadow-sm group-hover:shadow-xl group-hover:shadow-indigo-200 group-hover:-translate-x-4 group-hover:-translate-y-4 hidden lg:block`}
+                    >
+                        <Image
+                            src={image_preview_secondary}
+                            alt="Project image 2"
+                            width={1080}
+                            height={320}
+                            className="rounded-lg h-64 w-auto object-cover"
+                        />
+                    </Card>
+                )}
             </div>
-
         </Card>
     )
 }

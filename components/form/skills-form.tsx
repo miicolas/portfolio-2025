@@ -18,7 +18,6 @@ import {
 import { Input } from "@/components/ui/input"
 import UploadFile from "../ui/upload-file"
 import { useState } from "react"
-import { useRouter } from 'next/router';
 import { SkillsFormProps } from "@/lib/types";
 
 
@@ -35,7 +34,6 @@ const formSchema = z.object({
 
 export default function SkillsForm({ setOpen }: SkillsFormProps) {
 
-    const router = useRouter();
 
     const [logoUrl, setLogoUrl] = useState("");
 
@@ -66,7 +64,6 @@ export default function SkillsForm({ setOpen }: SkillsFormProps) {
                 toast.success("Skill added successfully");
                 form.reset();
                 setOpen(false);
-                router.reload();
 
             })
             .catch((error) => {
