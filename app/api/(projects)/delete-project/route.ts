@@ -22,15 +22,20 @@ export async function DELETE(req: Request) {
       });
     }
 
-    try {
-      await deleteImage(checkIfProjectExists[0].image_preview);
-      await deleteImage(checkIfProjectExists[0].image_preview_secondary);
-      await deleteImage(checkIfProjectExists[0].logo);
-    } catch {
-      return NextResponse.json({
-        message: "Failed to delete images",
-        error: "Failed to delete images"
-      });
+    if (checkIfProjectExists.length > 1) {
+      try {
+        if (checkIfProjectExists[0].image_preview) {
+          await deleteImage(checkIfProjectExists[0].image_preview);
+        }
+        if (checkIfProjectExists[0].image_preview_secondary) {
+          await deleteImage(checkIfProjectExists[0].image_preview_secondary);
+        }
+      } catch {
+        return NextResponse.json({
+          message: "Failed to delete images",
+          error: "Failed to delete images"
+        });
+      }
     }
 
     const project = await db

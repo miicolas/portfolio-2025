@@ -78,7 +78,6 @@ export default function ProjectsTable() {
                         <TableHead className="px-2 w-[100px] font-semibold text-left">ID</TableHead>
                         <TableHead className="font-semibold text-left">Name</TableHead>
                         <TableHead className="font-semibold text-left">Description</TableHead>
-                        <TableHead className="font-semibold text-left">Status</TableHead>
                         <TableHead className="text-left font-semibold">Actions</TableHead>
                     </TableRow>
                 </TableHeader>
@@ -89,7 +88,6 @@ export default function ProjectsTable() {
                                 <TableCell><Skeleton className="h-4 w-8" /></TableCell>
                                 <TableCell><Skeleton className="h-4 w-32" /></TableCell>
                                 <TableCell><Skeleton className="h-4 w-48" /></TableCell>
-                                <TableCell><Skeleton className="h-8 w-8 rounded-full" /></TableCell>
                                 <TableCell><Skeleton className="h-8 w-8 ml-auto" /></TableCell>
                             </TableRow>
                         ))
@@ -100,9 +98,6 @@ export default function ProjectsTable() {
                                 <TableCell className="font-medium">{project.name}</TableCell>
                                 <TableCell className="text-muted-foreground max-w-md truncate">
                                     {project.description}
-                                </TableCell>
-                                <TableCell className="text-muted-foreground max-w-md truncate">
-                                    {project.status}
                                 </TableCell>
                                 <TableCell className="text-left">
                                     <DropdownMenu>

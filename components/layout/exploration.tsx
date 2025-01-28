@@ -36,13 +36,11 @@ export default function Exploration() {
                         id={project.id}
                         name={project.name}
                         description={project.description}
-                        logo={project.logo}
                         image_preview={project.image_preview}
                         image_preview_secondary={project.image_preview_secondary}
                         link={project.link}
                         github={project.github}
                         tech_stack={project.tech_stack}
-                        status={project.status}
                     />
                 ))}
                 <div className="my-auto">
