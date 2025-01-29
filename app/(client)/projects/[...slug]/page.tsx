@@ -1,9 +1,13 @@
 import getProjectById from "@/action/(projects)/get-project/action";
 
-export default async function ProjectPage({ params }: { params: { slug: string, id: string } }) {
 
-  const project = await getProjectById(params.slug[1]);
+type PageProps = Promise<{ slug: string[] }>;
 
+export default async function ProjectPage(props: { params : PageProps}) {
+  const { slug } = await props.params;
+  const projectId = slug[1];
+  const project = await getProjectById(projectId);
+  
   if (!project || project instanceof Response) {
     return <div>Project not found</div>;
   }
