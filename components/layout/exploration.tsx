@@ -29,7 +29,33 @@ export default function Exploration() {
         <div className="py-16 mt-16" id="exploration">
 
             <Badge name="Exploration" description="Exploration allow me to discover new things and to learn new skills. I am always looking for new challenges and opportunities to grow." />
-            <HorizontalScoll itemCount={3}>
+            
+            <div className="hidden lg:block">
+                <HorizontalScoll itemCount={3}>
+                    {(data?.content as ProjectData[])?.slice(0, 3).map((project: ProjectData) => (
+                        <CardProject
+                            key={project.id}
+                            id={project.id}
+                            name={project.name}
+                            description={project.description}
+                            image_preview={project.image_preview}
+                            image_preview_secondary={project.image_preview_secondary}
+                            link={project.link}
+                            github={project.github}
+                            tech_stack={project.tech_stack}
+                        />
+                    ))}
+                    <div className="my-auto">
+                        <MagneticButton>
+                            <div className="flex flex-col items-center justify-center gap-4 text-center border border-neutral-500 rounded-full p-8 h-fit my-auto text-neutral-900 hover:bg-indigo-500/50 transition-all duration-300 ease-in-out">
+                                <MoveRight size={32} />
+                            </div>
+                        </MagneticButton>
+                    </div>
+                </HorizontalScoll>
+            </div>
+
+            <div className="lg:hidden space-y-16 mt-16">
                 {(data?.content as ProjectData[])?.slice(0, 3).map((project: ProjectData) => (
                     <CardProject
                         key={project.id}
@@ -43,17 +69,14 @@ export default function Exploration() {
                         tech_stack={project.tech_stack}
                     />
                 ))}
-                <div className="my-auto">
+                <div className="flex justify-center mt-8">
                     <MagneticButton>
-                        <div className="flex flex-col items-center justify-center gap-4 text-center border border-neutral-500 rounded-full p-8 h-fit my-auto text-neutral-900 hover:bg-indigo-500/50 transition-all duration-300 ease-in-out">
-                            <MoveRight size={32} className="hidden lg:block" />
-                            <MoveDown size={32} className="block lg:hidden" />
+                        <div className="flex items-center justify-center gap-4 text-center border border-neutral-500 rounded-full p-6 text-neutral-900 hover:bg-indigo-500/50 transition-all duration-300 ease-in-out">
+                            <MoveDown size={24} />
                         </div>
                     </MagneticButton>
                 </div>
-            </HorizontalScoll>
+            </div>
         </div>
     )
-
 }
-

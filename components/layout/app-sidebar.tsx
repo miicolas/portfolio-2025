@@ -15,7 +15,7 @@ import Logout from "./logout";
 const items = [
   {
     title: "Home",
-    url: "#",
+    url: "/",
     icon: Home,
   },
   {
