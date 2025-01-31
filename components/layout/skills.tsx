@@ -31,8 +31,6 @@ export default function Skills() {
         );
     }
 
-
-
     const positionLogo = (index: number) => [
         { top: '25rem', left: '5rem', },
         { top: '10rem', right: '5rem' },
@@ -69,18 +67,18 @@ export default function Skills() {
                 {loading ? (
                     <Skeleton className="h-4 w-48 mx-auto" />
                 ) : (
-                    (data?.content as SkillData[])?.map((skill, index) => (
+                    (data?.content as SkillData[])?.map((skill) => (
                         <Skill
                             key={skill.id}
-                            className={`relative ${index % 2 === 0 ? 'animate-skill_1' : 'animate-skill_2'}`}
+                            className={`relative animate-none`}
                             logo={skill.logo}
                             name={skill.name}
-                            style={{ animationDelay: `${index * 0.1}s` }}
+
                         />
                     ))
                 )}
 
-                
+
 
             </div>
 
