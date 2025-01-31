@@ -18,6 +18,7 @@ import {
 import { Input } from "@/components/ui/input"
 import UploadFile from "../ui/upload-file"
 import { useState } from "react"
+import { addProject } from "@/action/(projects)/add-project/action"
 
 const formSchema = z.object({
     name: z.string().min(2, {
@@ -58,33 +59,15 @@ export default function ProjectsForm({ setOpen }: ProjectsFormProps) {
         },
     });
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        const { name, description, image_preview, image_preview_secondary, link, github, tech_stack } = values;
-        fetch("/api/add-project", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                name,
-                description,
-                github,
-                link,
-                image_preview,
-                image_preview_secondary,
-                tech_stack,
-            }),
-        })
-            .then((response) => response.json())
-            .then(() => {
-                toast.success("Project added successfully");
-                form.reset();
-                setOpen(false);
-            })
-            .catch((error) => {
-                console.error("Error adding project:", error);
-                toast.error("Failed to add project");
-            });
+    async function onSubmit(values: z.infer<typeof formSchema>) {
+        try {
+            await addProject(values);
+            toast.success("Project added successfully");
+            setOpen(false);
+        } catch (error) {
+            console.error("Error adding project:", error);
+            toast.error("Failed to add project");
+        }
     }
 
     const handleImagePreviewUploadComplete = (url: string) => {
@@ -129,7 +112,7 @@ export default function ProjectsForm({ setOpen }: ProjectsFormProps) {
                         </FormItem>
                     )}
                 />
-                
+
                 <div className="flex flex-col lg:flex-row items-center justify-start gap-4">
                     <FormField
                         control={form.control}

@@ -1,38 +1,24 @@
-"use client";
-
 import { MoveDown, MoveRight } from "lucide-react";
 import HorizontalScoll from "./horizontal-scroll";
 import CardProject from "@/app/(client)/projects/_projects/card-project";
 import MagneticButton from "@/components/ui/magnetic-button";
 import Badge from "../ui/badge";
-import { useGetProjectsStore } from "@/store/get-projects";
-import { useEffect } from "react";
+
 import { ProjectData } from "@/lib/types";
+import { getProjects } from "@/action/(projects)/get-projects/action";
 
-export default function Exploration() {
+export default async function Exploration() {
 
-    const { data, error, fetchData } = useGetProjectsStore()
-
-    useEffect(() => {
-        fetchData()
-    }, [fetchData])
-
-    if (error) {
-        return (
-            <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-center text-sm text-red-600">
-                Error loading Projects: {error}
-            </div>
-        )
-    }
+    const data = await getProjects();
 
     return (
         <div className="py-16 mt-16" id="exploration">
 
             <Badge name="Exploration" description="Exploration allow me to discover new things and to learn new skills. I am always looking for new challenges and opportunities to grow." />
-            
+
             <div className="hidden lg:block">
                 <HorizontalScoll itemCount={3}>
-                    {(data?.content as ProjectData[])?.slice(0, 3).map((project: ProjectData) => (
+                    {(data?.projects as ProjectData[])?.slice(0, 3).map((project: ProjectData) => (
                         <CardProject
                             key={project.id}
                             id={project.id}
@@ -56,7 +42,7 @@ export default function Exploration() {
             </div>
 
             <div className="lg:hidden space-y-16 mt-16">
-                {(data?.content as ProjectData[])?.slice(0, 3).map((project: ProjectData) => (
+                {(data?.projects as ProjectData[])?.slice(0, 3).map((project: ProjectData) => (
                     <CardProject
                         key={project.id}
                         id={project.id}

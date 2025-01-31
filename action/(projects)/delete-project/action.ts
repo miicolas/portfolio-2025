@@ -1,0 +1,50 @@
+'use server';
+
+import { db } from "@/db";
+import { projectsTable } from "@/db/schema";
+import { eq } from "drizzle-orm";
+import { deleteImage } from "@/lib/utils";
+import { z } from "zod";
+
+const bodySchema = z.object({
+    id: z.number(),
+});
+
+export async function deleteProject(body: z.infer<typeof bodySchema>) {
+    try {
+        const validatedBody = bodySchema.parse(body);
+        const id = validatedBody.id;
+
+        const project = await db
+            .select()
+            .from(projectsTable)
+            .where(eq(projectsTable.id, id))
+            .execute()
+            .then(res => res[0]);
+
+        if (!project) {
+            return { status: "error", message: "Project not found" };
+        }
+
+        try {
+            if (project.image_preview) {
+                await deleteImage(project.image_preview);
+            }
+            if (project.image_preview_secondary) {
+                await deleteImage(project.image_preview_secondary);
+            }
+        } catch {
+            return { status: "error", message: "Failed to delete images" };
+        }
+
+        await db
+            .delete(projectsTable)
+            .where(eq(projectsTable.id, id))
+            .execute();
+        
+        return { status: "success", message: "Project deleted successfully" };
+    } catch (error) {
+        console.error("Error deleting project:", error);
+        return { status: "error", message: "Failed to delete project" };
+    }
+}

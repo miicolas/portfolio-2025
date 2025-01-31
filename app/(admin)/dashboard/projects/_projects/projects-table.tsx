@@ -22,40 +22,19 @@ import {
 
 import { Button } from "@/components/ui/button"
 import { MoreHorizontal, Pencil, Trash2, Eye } from "lucide-react"
-import { useGetProjectsStore } from "@/store/get-projects"
-import { Skeleton } from "@/components/ui/skeleton"
 import { toast } from "sonner"
 import { ProjectData } from "@/lib/types"
+import { deleteProject } from "@/action/(projects)/delete-project/action"
+import { getProjects } from "@/action/(projects)/get-projects/action"
 
-export default function ProjectsTable() {
-    const { data, loading, error, fetchData } = useGetProjectsStore()
-
-    useEffect(() => {
-        fetchData()
-    }, [fetchData])
-
-    if (error) {
-        return (
-            <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-center text-sm text-red-600">
-                Error loading projects: {error}
-            </div>
-        )
-    }
+export default function ProjectsTable({ projects }: { projects: ProjectData[] }) {
 
     const handleDelete = async (id: number) => {
         try {
-            const response = await fetch(`/api/delete-project`, {
-                method: "DELETE",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    id,
-                }),
-            });
-            const data = await response.json();
-            toast.success(data.message);
-            fetchData();
+            await deleteProject({ id });
+            toast.success("Project deleted successfully");
+            await getProjects()
+
         }
         catch (error) {
             console.error("Error deleting project:", error);
@@ -66,13 +45,6 @@ export default function ProjectsTable() {
     return (
         <div className="rounded-lg border bg-card">
             <Table>
-                <TableCaption className="pb-4">
-                    {loading ? (
-                        <Skeleton className="h-4 w-48 mx-auto" />
-                    ) : (
-                        `Total Projects: ${data?.content?.length || 0}`
-                    )}
-                </TableCaption>
                 <TableHeader>
                     <TableRow className="hover:bg-transparent">
                         <TableHead className="px-2 w-[100px] font-semibold text-left">ID</TableHead>
@@ -82,54 +54,45 @@ export default function ProjectsTable() {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {loading ? (
-                        [1, 2, 3].map((i) => (
-                            <TableRow key={i}>
-                                <TableCell><Skeleton className="h-4 w-8" /></TableCell>
-                                <TableCell><Skeleton className="h-4 w-32" /></TableCell>
-                                <TableCell><Skeleton className="h-4 w-48" /></TableCell>
-                                <TableCell><Skeleton className="h-8 w-8 ml-auto" /></TableCell>
-                            </TableRow>
-                        ))
-                    ) : (
-                        (data?.content as ProjectData[])?.map((project: ProjectData) => (
-                            <TableRow key={project.id} className="group">
-                                <TableCell className="font-medium">{project.id}</TableCell>
-                                <TableCell className="font-medium">{project.name}</TableCell>
-                                <TableCell className="text-muted-foreground max-w-md truncate">
-                                    {project.description}
-                                </TableCell>
-                                <TableCell className="text-left">
-                                    <DropdownMenu>
-                                        <DropdownMenuTrigger asChild>
-                                            <Button
-                                                variant="ghost"
-                                                className="h-8 w-8 p-2"
-                                            >
-                                                <MoreHorizontal className="h-4 w-4" />
-                                            </Button>
-                                        </DropdownMenuTrigger>
-                                        <DropdownMenuContent align="end" className="w-[160px]">
-                                            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                                            <DropdownMenuSeparator />
-                                            <DropdownMenuItem>
-                                                <Eye className="mr-2 h-4 w-4" />
-                                                View Details
-                                            </DropdownMenuItem>
-                                            <DropdownMenuItem>
-                                                <Pencil className="mr-2 h-4 w-4" />
-                                                Edit Project
-                                            </DropdownMenuItem>
-                                            <DropdownMenuItem className="text-red-600" onClick={() => handleDelete(project.id)}>
-                                                <Trash2 className="mr-2 h-4 w-4" />
-                                                Delete
-                                            </DropdownMenuItem>
-                                        </DropdownMenuContent>
-                                    </DropdownMenu>
-                                </TableCell>
-                            </TableRow>
-                        ))
-                    )}
+                    {projects.map((project: ProjectData) => (
+                        <TableRow key={project.id} className="group">
+                            <TableCell className="font-medium">{project.id}</TableCell>
+                            <TableCell className="font-medium">{project.name}</TableCell>
+                            <TableCell className="text-muted-foreground max-w-md truncate">
+                                {project.description}
+                            </TableCell>
+                            <TableCell className="text-left">
+                                <DropdownMenu>
+                                    <DropdownMenuTrigger asChild>
+                                        <Button
+                                            variant="ghost"
+                                            className="h-8 w-8 p-2"
+                                        >
+                                            <MoreHorizontal className="h-4 w-4" />
+                                        </Button>
+                                    </DropdownMenuTrigger>
+                                    <DropdownMenuContent align="end" className="w-[160px]">
+                                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                                        <DropdownMenuSeparator />
+                                        <DropdownMenuItem>
+                                            <Eye className="mr-2 h-4 w-4" />
+                                            View Details
+                                        </DropdownMenuItem>
+                                        <DropdownMenuItem>
+                                            <Pencil className="mr-2 h-4 w-4" />
+                                            Edit Project
+                                        </DropdownMenuItem>
+                                        <DropdownMenuItem className="text-red-600" onClick={() => handleDelete(project.id)}>
+                                            <Trash2 className="mr-2 h-4 w-4" />
+                                            Delete
+                                        </DropdownMenuItem>
+                                    </DropdownMenuContent>
+                                </DropdownMenu>
+                            </TableCell>
+                        </TableRow>
+                    ))
+
+                    }
                 </TableBody>
             </Table>
         </div>

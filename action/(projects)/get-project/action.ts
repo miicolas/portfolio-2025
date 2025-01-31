@@ -10,7 +10,8 @@ export default async function getProjectById(id: string): Promise<ProjectData | 
         if (!id) {
             return new Response('ID is required', { status: 400 });
         }
-    
+        console.log('id:', id);
+
         const project = await db
             .select()
             .from(projectsTable)
