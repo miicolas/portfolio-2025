@@ -19,6 +19,7 @@ import { Input } from "@/components/ui/input"
 import UploadFile from "../ui/upload-file"
 import { useState } from "react"
 import { addProject } from "@/action/(projects)/add-project/action"
+import { Textarea } from "../ui/textarea"
 
 const formSchema = z.object({
     name: z.string().min(2, {
@@ -28,9 +29,10 @@ const formSchema = z.object({
     }),
     description: z.string().min(2, {
         message: "Description must be at least 2 characters long",
-    }).max(255, {
-        message: "Description must be at most 255 characters long",
+    }).max(1000, {
+        message: "Description must be at most 1000 characters long",
     }),
+    
     link: z.string().url().optional(),
     github: z.string().url().optional(),
     image_preview: z.string().url().optional(),
@@ -106,7 +108,7 @@ export default function ProjectsForm({ setOpen }: ProjectsFormProps) {
                         <FormItem>
                             <FormLabel>Description</FormLabel>
                             <FormControl>
-                                <Input placeholder="Description" {...field} className="w-fit" />
+                                <Textarea placeholder="Description" {...field} className="w-full" />
                             </FormControl>
                             <FormMessage />
                         </FormItem>

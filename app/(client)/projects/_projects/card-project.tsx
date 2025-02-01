@@ -13,31 +13,33 @@ export default function CardProject({ name, description, image_preview, image_pr
 
     return (
         <Card className="w-full h-[70vh] xl:w-[100vh] bg-neutral-100 rounded-lg p-10 overflow-hidden relative group flex flex-col justify-between">
-            <div className="w-full flex flex-col lg:flex-row lg:justify-between">
+            <div className="w-full flex flex-col lg:justify-between">
                 <div className="flex flex-col gap-4">
                     <h1 className="text-6xl text-neutral-900 dark:text-neutral-50">{name}</h1>
-                    <p className="text-neutral-800 dark:text-neutral-50 text-2xl text-balance font-light">{description}</p>
+                    <p className="text-neutral-800 dark:text-neutral-50 text-2xl text-balance font-light">{description.slice(0, 105)}...</p>
                 </div>
-                <div className="flex gap-2 flex-wrap mt-4">
-                    {techStackArray.map((tech, index) => (
-                        <span
-                            key={index}
-                            className="text-neutral-300 text-sm border border-neutral-200 p-2 w-fit rounded-lg text-balance hover:text-neutral-900 transition-all duration-300 h-fit"
-                        >
-                            {tech}
-                        </span>
-                    ))}
+                <div className="flex gap-2 flex-wrap mt-4 items-end">
+                    <div className="flex gap-2 flex-wrap mt-4">
+                        {techStackArray.map((tech, index) => (
+                            <span
+                                key={index}
+                                className="text-neutral-300 text-sm border border-neutral-200 p-2 w-fit rounded-lg text-balance hover:text-neutral-900 transition-all duration-300 h-fit"
+                            >
+                                {tech}
+                            </span>
+                        ))}
+                    </div>
+                    <div className="group-[button]: w-fit h-fit z-10 mt-10 lg:mt-0">
+                        <Link href="/projects/">
+                            <MoveDiagonal
+                                strokeWidth={1}
+                                size={36}
+                                className="text-neutral-500 dark:text-neutral-50 group-hover:text-neutral-900 dark:group-hover:text-neutral-300 transition-all duration-200 ease-in-out"
+                            />
+                        </Link>
+                    </div>
                 </div>
-                <div className="group-[button]: w-fit h-fit z-10 mt-10 lg:mt-0">
-                    <Link href="/projects/">
-                        <MoveDiagonal
-                            strokeWidth={1}
-                            size={36}
-                            className="text-neutral-500 dark:text-neutral-50 group-hover:text-neutral-900 dark:group-hover:text-neutral-300 transition-all duration-200 ease-in-out"
-                        />
-                    </Link>
-                </div>
-                
+
             </div>
             <div className="w-full h-full flex justify-center items-center relative z-10">
 

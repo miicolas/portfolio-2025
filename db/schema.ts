@@ -14,7 +14,7 @@ export const skillsTable = mysqlTable('skills_table', {
 export const projectsTable = mysqlTable('projects_table', {
     id: serial().primaryKey(),
     name: varchar({ length: 255 }).notNull(),
-    description: varchar({ length: 255 }).notNull(),
+    description: text().notNull(),
     link: varchar({ length: 255 }),
     github: varchar({ length: 255 }),
     image_preview: varchar({ length: 255 }),

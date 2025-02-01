@@ -51,7 +51,6 @@ interface MultiSelectProps
   options: {
     label: string;
     value: string;
-    icon?: React.ComponentType<{ className?: string }>;
   }[];
   onValueChange: (value: string[]) => void;
   defaultValue?: string[];
@@ -152,7 +151,6 @@ export const MultiSelect = React.forwardRef<
                 <div className="flex flex-wrap items-center">
                   {selectedValues.slice(0, maxCount).map((value) => {
                     const option = options.find((o) => o.value === value);
-                    const IconComponent = option?.icon;
                     return (
                       <div
                         key={value}
@@ -162,9 +160,7 @@ export const MultiSelect = React.forwardRef<
                         )}
                         style={{ animationDuration: `${animation}s` }}
                       >
-                        {IconComponent && (
-                          <IconComponent className="h-4 w-4 mr-2" />
-                        )}
+                      
                         {option?.label}
                         <XCircle
                           className="ml-2 h-4 w-4 cursor-pointer"
@@ -269,9 +265,6 @@ export const MultiSelect = React.forwardRef<
                       >
                         <CheckIcon className="h-4 w-4" />
                       </div>
-                      {option.icon && (
-                        <option.icon className="mr-2 h-4 w-4 text-muted-foreground" />
-                      )}
                       <span>{option.label}</span>
                     </CommandItem>
                   );
