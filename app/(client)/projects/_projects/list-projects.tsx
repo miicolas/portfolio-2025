@@ -39,12 +39,15 @@ export default function ListProjects({ filterFrameworks, projects }: { filterFra
                                         animate={{ opacity: 1 }}
                                     >
                                         <div className="relative h-full w-full">
-                                            <Image
-                                                src={project.image_preview}
-                                                alt={project.name}
-                                                fill
-                                                className="aspect-square object-cover object-center rounded-lg"
-                                            />
+                                            {project.image_preview && (
+                                                <Image
+                                                    src={project.image_preview}
+                                                    alt={project.name}
+                                                    fill
+                                                    className="aspect-square object-cover object-center rounded-lg"
+                                                />
+                                            )}
+                
                                         </div>
                                         <div className="flex gap-2 flex-wrap mt-4">
                                             {techStackArray.map((tech, index) => (

@@ -8,11 +8,11 @@ import Link from 'next/link';
 
 type PageProps = Promise<{ slug: string[] }>;
 
-export default async function ProjectPage(props: { params : PageProps}) {
+export default async function ProjectPage(props: { params: PageProps }) {
   const { slug } = await props.params;
   const projectId = slug[1];
   const project = await getProjectById(projectId);
-  
+
   if (!project || project instanceof Response) {
     return (
       <div className="flex justify-center items-center h-screen text-2xl text-gray-500">
@@ -31,7 +31,7 @@ export default async function ProjectPage(props: { params : PageProps}) {
             <Link href="/projects" className='border border-transparent p-2 rounded-lg hover:border-neutral-500 hover:text-neutral-900 transition-all duration-300 ease-in-out'>
               <ArrowLeft className="h-6 w-6 text-neutral-500" />
             </Link>
-            
+
             <h1 className="text-3xl font-bold">{project.name}</h1>
           </div>
           <div className="flex gap-2">
@@ -70,7 +70,7 @@ export default async function ProjectPage(props: { params : PageProps}) {
           </div>
 
           <div className="md:sticky md:top-16 self-start space-y-6">
-            {project.image_preview && (
+            {project.image_preview && project.image_preview !== "" && (
               <div className="rounded-lg overflow-hidden shadow-lg">
                 <Image
                   src={project.image_preview}
@@ -82,7 +82,7 @@ export default async function ProjectPage(props: { params : PageProps}) {
               </div>
             )}
 
-            {project.image_preview_secondary && (
+            {project.image_preview_secondary && project.image_preview_secondary !== "" && (
               <div className="rounded-lg overflow-hidden shadow-lg">
                 <Image
                   src={project.image_preview_secondary}

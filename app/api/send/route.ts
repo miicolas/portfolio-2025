@@ -9,7 +9,6 @@ export async function POST(req: Request) {
 
     const { message, email, subject, name } = await req.json();
 
-
     const messageCleaned = message
       .replace(/[\n\t@#]/g, ' ')
       .replace(/\s+/g, ' ')
