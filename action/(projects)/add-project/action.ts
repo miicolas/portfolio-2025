@@ -18,6 +18,13 @@ export async function addProject(body: z.infer<typeof bodySchema>) {
     try {
         const validatedBody = bodySchema.parse(body);
 
+        if (!validatedBody.name || !validatedBody.description) {
+            return { status: "error", message: "Missing required fields" };
+        }
+        if (validatedBody.link && !validatedBody.github) {
+            return { status: "error", message: "Link provided without GitHub" };
+        }
+
         const project = await db.insert(projectsTable)
             .values(validatedBody).$returningId()
             .execute();
