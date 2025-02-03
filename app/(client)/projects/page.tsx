@@ -5,10 +5,14 @@ import { ProjectData } from "@/lib/types";
 
 const frameworksList = [
   { value: "react", label: "React" },
-  { value: "angular", label: "Angular" },
   { value: "vue", label: "Vue" },
   { value: "svelte", label: "Svelte" },
-  { value: "ember", label: "Ember" },
+  { value: "next.js", label: "Next.js" },
+  { value: "node.js", label: "Node.js" },
+  { value: "express.js", label: "Express.js" },
+  { value: "tailwind css", label: "Tailwind CSS" },
+  { value: "typescript", label: "TypeScript" },
+
 ];
 
 export default async function Projects() {
