@@ -62,7 +62,7 @@ export default function ExperienceItem({ experience, index, isMobile }: Experien
                 >
 
                     <div className="flex flex-col space-y-3">
-                        
+
                         <div className="flex items-start justify-between">
                             <div className="flex items-center space-x-3">
 
@@ -80,9 +80,9 @@ export default function ExperienceItem({ experience, index, isMobile }: Experien
                             <p className="text-sm font-light">
                                 {formatISODate(experience.startDate)} - {experience.endDate ? formatISODate(experience.endDate) : "Present"}
                             </p>
-                            <Link href={`/experience/${experience.id}`} className="group-[button] bg-transparent text-neutral-500 dark:text-neutral-50 group-hover:text-neutral-900 rounded-full group-hover:bg-neutral-200 p-2 dark:group-hover:text-neutral-300 transition-all duration-200 ease-in-out">
+                            {/* <Link href={`/experience/${experience.id}`} className="group-[button] bg-transparent text-neutral-500 dark:text-neutral-50 group-hover:text-neutral-900 rounded-full group-hover:bg-neutral-200 p-2 dark:group-hover:text-neutral-300 transition-all duration-200 ease-in-out">
                                 <ExternalLink strokeWidth={1} size={24} className="text-neutral-500 dark:text-neutral-50 group-hover:text-neutral-900 dark:group-hover:text-neutral-300 transition-all duration-200 ease-in-out" />
-                            </Link>
+                            </Link> */}
 
                         </div>
                     </div>
