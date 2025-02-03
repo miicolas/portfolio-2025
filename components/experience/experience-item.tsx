@@ -1,7 +1,5 @@
 import { motion } from "motion/react";
-import { ExternalLink } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { Separator } from "../ui/separator";
 import { formatISODate } from "@/lib/utils";
 
