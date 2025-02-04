@@ -1,3 +1,4 @@
+'use client'
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
@@ -78,7 +79,7 @@ export default function ExperiencesTable({ experiences }: { experiences: Experie
                                         </DropdownMenuItem>
                                         <DropdownMenuItem
                                             className="text-red-600"
-                                            onClick={() => handleDelete(Number(experience.id))}
+                                            onClick={() => handleDelete(experience.id)}
                                         >
                                             <Trash2 className="mr-2 h-4 w-4" />
                                             Delete
