@@ -1,7 +1,7 @@
 'use client'
 
 import Image from "next/image"
-import Badge from "../ui/badge"
+import Badge from "../ui/badge-section"
 import Card from "../ui/card"
 import { useEffect } from "react"
 import { useGetSkillsStore } from "@/store/get-skills"

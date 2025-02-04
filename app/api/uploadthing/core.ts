@@ -11,11 +11,7 @@ export const ourFileRouter = {
     },
   })
     
-    .onUploadComplete(async ({file }) => {
-      console.log("Upload complete");
-
-      console.log("file url", file.url);
-
+    .onUploadComplete(async () => {
       return { uploadedBy : "Nicolas" };
     }),
 } satisfies FileRouter;

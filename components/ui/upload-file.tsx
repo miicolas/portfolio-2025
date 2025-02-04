@@ -10,7 +10,6 @@ export default function UploadFile({ onUploadComplete }: UploadFileProps) {
         <UploadButton
             endpoint="imageUploader"
             onClientUploadComplete={(res) => {
-                console.log("Files: ", res);
                 if (res && res.length > 0) {
                     onUploadComplete(res[0].url);
                     toast.success('Upload successful');

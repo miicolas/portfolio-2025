@@ -4,6 +4,7 @@ import { ArrowLeft, ExternalLink, Github } from "lucide-react";
 import Image from 'next/image';
 import getProjectById from "@/action/(projects)/get-project/action";
 import Link from 'next/link';
+import { Badge } from "@/components/ui/badge";
 
 
 type PageProps = Promise<{ slug: string[] }>;
@@ -59,12 +60,13 @@ export default async function ProjectPage(props: { params: PageProps }) {
             <p className="text-muted-foreground">{project.description}</p>
             <div className="flex flex-wrap gap-2 mt-4">
               {techStackArray.map((tech, index) => (
-                <span
-                  key={index}
-                  className="text-neutral-300 text-sm border border-neutral-200 p-2 w-fit rounded-lg text-balance hover:text-neutral-900 transition-all duration-300 h-fit"
-                >
-                  {tech}
-                </span>
+                <Badge
+                key={index}
+                variant="secondary"
+                className="text-xs font-neueMontreal font-light border border-neutral-200 dark:border-neutral-800"
+            >
+                {tech}
+            </Badge>
               ))}
             </div>
           </div>

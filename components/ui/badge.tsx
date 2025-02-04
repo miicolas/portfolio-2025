@@ -1,56 +1,36 @@
-'use client'
-import { BadgeData } from "@/lib/types";
-import { motion } from "motion/react";
+import * as React from "react"
+import { cva, type VariantProps } from "class-variance-authority"
 
-export default function Badge({ name, description }: BadgeData) {
-    return (
-        <div className="flex flex-col items-center gap-4">
-            <motion.div
-                className="w-fit px-8 py-2 [background:linear-gradient(45deg,#fff,theme(colors.neutral.200))_padding-box,conic-gradient(from_var(--border-angle),theme(colors.neutral.200/.48)_80%,_theme(colors.indigo.500)_86%,_theme(colors.indigo.300)_90%,_theme(colors.indigo.500)_94%,_theme(colors.neutral.200))_border-box] rounded-lg border-2 border-transparent animate-border cursor-no-drop"
-                initial={{
-                    opacity: 0,
-                    scale: 0.8,
-                    y: 20
-                }}
-                whileInView={{
-                    opacity: 1,
-                    scale: 1,
-                    y: 0,
-                    transition: {
-                        type: "spring",
-                        stiffness: 80,
-                        damping: 15,
-                        mass: 1,
-                        delay: 0.2
-                    }
-                }}
-                viewport={{
-                    once: true,
-                    margin: "-50px"
-                }}
+import { cn } from "@/lib/utils"
 
-            >
-                <span className="text-xl font-medium text-neutral-800 dark:text-neutral-50">
-                    {name}
-                </span>
-            </motion.div>
-            <motion.p
-                className="text-xl font-neueMontreal font-light text-neutral-800 dark:text-neutral-50 text-balance text-center max-w-4xl"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{
-                    opacity: 1,
-                    y: 0,
-                    transition: {
-                        type: "spring",
-                        stiffness: 80,
-                        damping: 15,
-                        delay: 0.3
-                    }
-                }}
-                viewport={{ once: true }}
-            >
-                {description}
-            </motion.p>
-        </div>
-    )
+const badgeVariants = cva(
+  "inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+  {
+    variants: {
+      variant: {
+        default:
+          "border-transparent bg-primary text-primary-foreground shadow hover:bg-primary/80",
+        secondary:
+          "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        destructive:
+          "border-transparent bg-destructive text-destructive-foreground shadow hover:bg-destructive/80",
+        outline: "text-foreground",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  }
+)
+
+export interface BadgeProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof badgeVariants> {}
+
+function Badge({ className, variant, ...props }: BadgeProps) {
+  return (
+    <div className={cn(badgeVariants({ variant }), className)} {...props} />
+  )
 }
+
+export { Badge, badgeVariants }

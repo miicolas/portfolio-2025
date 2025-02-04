@@ -18,7 +18,6 @@ const experienceSchema = z.object({
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    console.log(body);
     const parsedBody = experienceSchema.parse(body);
 
     const { company, position, startDate, endDate, logo } = parsedBody;

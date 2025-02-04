@@ -1,6 +1,6 @@
 'use client'
 
-import Badge from "@/components/ui/badge";
+import Badge from "@/components/ui/badge-section";
 import ContactForm from "@/components/form/contact-form";
 import { motion } from "motion/react";
 
