@@ -1,15 +1,9 @@
 'use client'
 
-
 import { useScroll, motion, useSpring } from "motion/react";
 import { useRef, useState, useEffect } from "react";
-import ExperienceHeader from "../experience/experience-header";
 import ExperienceList from "../experience/experience-list";
 import { ExperienceData } from "@/lib/types";
-import { getExperiences } from "@/action/(experiences)/get-experiences/action";
-
-
-   
 
 export default function ExperienceContent({ experience }: { experience: ExperienceData[] }) {
     const containerRef = useRef<HTMLDivElement | null>(null);
