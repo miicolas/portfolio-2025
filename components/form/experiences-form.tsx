@@ -24,6 +24,7 @@ import {
     InputOTPSlot,
 } from "@/components/ui/input-otp"
 import { parseDate } from "@/lib/utils"
+import { addExperience } from "@/action/(experiences)/add-experience/action"
 
 
 const formSchema = z.object({
@@ -79,29 +80,22 @@ export default function ExperiencesForm({ setOpen }: ExperiencesFormProps) {
         const startDateDate = parseDate(startDate);
         const endDateDate = endDate ? parseDate(endDate) : null;
 
-        await fetch("/api/add-experience", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
+        try {
+             await addExperience({
                 company,
                 position,
-                startDate: startDateDate?.toISOString(),
+                startDate: startDateDate ? startDateDate.toISOString() : "",
                 endDate: endDateDate?.toISOString(),
                 logo,
-            }),
-        })
-        .then((response) => response.json())
-        .then(() => {
+            });
             toast.success("Experience added successfully");
             form.reset();
+
             setOpen(false);
-        })
-        .catch((error) => {
+        } catch (error) {
             console.error("Error adding experience:", error);
             toast.error("Failed to add experience");
-        });
+        };
     }
 
     const handleLogoUploadComplete = (url: string) => {
@@ -202,9 +196,9 @@ export default function ExperiencesForm({ setOpen }: ExperiencesFormProps) {
                         <FormItem>
                             <FormLabel>End Date (DDMMYY) - Optional</FormLabel>
                             <FormControl>
-                                <InputOTP 
-                                    maxLength={6} 
-                                    {...field} 
+                                <InputOTP
+                                    maxLength={6}
+                                    {...field}
                                     value={field.value || ""}
                                     onChange={value => field.onChange(value || undefined)}
                                 >

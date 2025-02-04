@@ -32,7 +32,7 @@ export interface ProjectData {
 }
 
 export interface ExperienceData {
-    id: string;
+    id: number;
     company: string;
     position: string;
     startDate: Date;

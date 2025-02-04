@@ -3,11 +3,9 @@ import Image from "next/image";
 import { Separator } from "../ui/separator";
 import { formatISODate } from "@/lib/utils";
 
-
-
 interface ExperienceItemProps {
     experience: {
-        id: string;
+        id: number;
         company: string;
         position: string;
         startDate: Date;
@@ -18,7 +16,6 @@ interface ExperienceItemProps {
     index: number;
     isMobile: boolean;
 }
-
 
 export default function ExperienceItem({ experience, index, isMobile }: ExperienceItemProps) {
     const isLeft = index % 2 === 0;
