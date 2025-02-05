@@ -5,14 +5,15 @@ import { experienceTable } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { deleteImage } from "@/lib/utils";
 import { z } from "zod";
+import { revalidatePath } from "next/cache";
 
 const bodySchema = z.object({
-    id: z.number(),
+  id: z.number(),
 });
 
 export async function deleteExperience(body: z.infer<typeof bodySchema>) {
   try {
-    
+
     const { id } = body;
 
     const checkIfExperienceExists = await db
@@ -40,6 +41,7 @@ export async function deleteExperience(body: z.infer<typeof bodySchema>) {
       .delete(experienceTable)
       .where(eq(experienceTable.id, id));
 
+    revalidatePath("/dashboard/experiences");
     return {
       message: "Experience deleted successfully",
       experience

@@ -5,6 +5,8 @@ import { projectsTable } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { deleteImage } from "@/lib/utils";
 import { z } from "zod";
+import { revalidatePath } from "next/cache";
+
 
 const bodySchema = z.object({
     id: z.number(),
@@ -41,7 +43,8 @@ export async function deleteProject(body: z.infer<typeof bodySchema>) {
             .delete(projectsTable)
             .where(eq(projectsTable.id, id))
             .execute();
-        
+
+        revalidatePath("/dashboard/projects");
         return { status: "success", message: "Project deleted successfully" };
     } catch (error) {
         console.error("Error deleting project:", error);

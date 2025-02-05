@@ -8,7 +8,6 @@ export async function getExperiences() {
     try {
 
         const experiences = await db.select().from(experienceTable);
-
         return { status: "success", experiences };
     } catch (error) {
         console.error("Error getting experiences:", error);

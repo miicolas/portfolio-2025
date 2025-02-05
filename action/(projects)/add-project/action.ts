@@ -3,6 +3,7 @@
 import { db } from "@/db";
 import { projectsTable } from "@/db/schema";
 import { z } from "zod";
+import { revalidatePath } from "next/cache";
 
 const bodySchema = z.object({
     name: z.string().min(1),
@@ -25,6 +26,8 @@ export async function addProject(body: z.infer<typeof bodySchema>) {
         const project = await db.insert(projectsTable)
             .values(validatedBody).$returningId()
             .execute();
+
+        revalidatePath("/dashboard/projects");
 
         return { status: "success", project };
     } catch (error) {

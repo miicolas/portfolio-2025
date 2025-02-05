@@ -3,6 +3,9 @@
 import { db } from "@/db";
 import { experienceTable } from "@/db/schema";
 import { z } from "zod";
+import { revalidatePath } from "next/cache";
+import exp from "constants";
+
 
 const bodySchema = z.object({
   company: z.string().min(1, "Company name is required"),
@@ -30,7 +33,10 @@ export async function addExperience(body: z.infer<typeof bodySchema>) {
       logo,
     });
 
-    return { status: "success", experience }
+    const plainExperienceData = JSON.parse(JSON.stringify(experience));
+
+    revalidatePath("/dashboard/experiences");
+    return { status: "success", plainExperienceData }
   } catch (error) {
     console.error("Error adding experience:", error);
     return { status: "error", message: "Failed to add experience" };
