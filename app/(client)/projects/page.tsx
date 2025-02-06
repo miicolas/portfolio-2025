@@ -23,7 +23,6 @@ export default async function Projects() {
       <FilterListProjects
         frameworksList={frameworksList}
         projects={data.projects as ProjectData[]}
-
       />
     </Suspense>
   );

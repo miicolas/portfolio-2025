@@ -7,7 +7,6 @@ import { Badge } from "@/components/ui/badge";
 
 export default function ListProjects({ filterFrameworks, projects }: { filterFrameworks: string[], projects: ProjectData[] }) {
     return (
-        
             <div className="flex flex-col gap-4 h-[calc(100vh-50vh)] my-8">
                 {projects &&
                     (projects as ProjectData[])
@@ -55,7 +54,7 @@ export default function ListProjects({ filterFrameworks, projects }: { filterFra
                                                 <Badge
                                                     key={index}
                                                     variant="secondary"
-                                                    className="text-xs font-neueMontreal font-light border border-neutral-200 dark:border-neutral-800"
+                                                    className="font-neueMontreal font-light border border-neutral-200 dark:border-neutral-800"
                                                 >
                                                     {tech}
                                                 </Badge>
