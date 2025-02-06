@@ -11,4 +11,4 @@ export async function getProjects() {
         console.error("Error getting projects:", error);
         return { status: "error", message: "Failed to get projects" };
     }
-}
+} 
