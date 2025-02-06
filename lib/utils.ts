@@ -54,6 +54,8 @@ export async function deleteImage(fileUrl: string) {
   if (!response.ok) {
     throw new Error("Failed to delete image");
   }
+  return { status: "success" };
+
 };
 
 export function slugify(text: string) {
