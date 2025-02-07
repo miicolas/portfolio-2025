@@ -1,15 +1,14 @@
-
 import type { Metadata } from "next";
 import "./globals.css";
 import ScrollSmooth from "@/components/layout/scroll-smooth";
-import { Toaster } from "@/components/ui/sonner"
-import localFont from 'next/font/local'
+import { Toaster } from "@/components/ui/sonner";
+import localFont from 'next/font/local';
 
 const dx_Bloop = localFont({
   src: './font/graffity-fill-webfont.woff2',
   display: 'swap',
   variable: '--font-dx-bloop',
-})
+});
 
 const neueMontreal = localFont({
   src: [
@@ -42,7 +41,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -53,7 +51,6 @@ export default function RootLayout({
           <Toaster />
         </ScrollSmooth>
       </body>
-
     </html>
   );
 }

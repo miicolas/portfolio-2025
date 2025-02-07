@@ -4,9 +4,9 @@ import { motion } from "motion/react";
 
 export default function BadgeSection({ description }: BadgeData) {
     return (
-
+<div className="flex flex-col items-center justify-center">
         <motion.p
-            className="text-2xl font-neueMontreal font-medium text-neutral-800 dark:text-neutral-50 text-balance text-center max-w-4xl"
+            className="text-2xl font-neueMontreal font-medium text-neutral-800 dark:text-neutral-50 text-balance text-center max-w-4xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{
                 opacity: 1,
@@ -21,7 +21,7 @@ export default function BadgeSection({ description }: BadgeData) {
             viewport={{ once: true }}
         >
             {description}
-        </motion.p>
+        </motion.p></div>
 
     )
 }
