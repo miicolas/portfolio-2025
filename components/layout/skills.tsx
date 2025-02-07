@@ -1,12 +1,8 @@
-'use client'
-
 import Image from "next/image"
 import Badge from "../ui/badge-section"
 import Card from "../ui/card"
-import { useEffect } from "react"
-import { useGetSkillsStore } from "@/store/get-skills"
-import { Skeleton } from "../ui/skeleton"
 import { SkillData } from "@/lib/types"
+import { getSkills } from "@/action/(skills)/get-skills/action"
 
 export const Skill = ({ className, logo, name, style }: { className: string, logo: string, name: string, style?: React.CSSProperties }) => {
     return (
@@ -16,20 +12,9 @@ export const Skill = ({ className, logo, name, style }: { className: string, log
     )
 }
 
-export default function Skills() {
-    const { data, loading, error, fetchData } = useGetSkillsStore();
+export default async function Skills() {
 
-    useEffect(() => {
-        fetchData();
-    }, [fetchData]);
-
-    if (error) {
-        return (
-            <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-center text-sm text-red-600">
-                Error loading skills: {error}
-            </div>
-        );
-    }
+    const data = await getSkills();
 
     const positionLogo = (index: number) => [
         { top: '25rem', left: '5rem', },
@@ -50,7 +35,7 @@ export default function Skills() {
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1/2 h-16 opacity-40 blur-[50px] bg-indigo-500 rounded-full">
                 </div>
                 <div className="hidden lg:block">
-                    {(data?.content as SkillData[])?.map((skill, index) => (
+                    {(data?.skills as SkillData[])?.map((skill, index) => (
                         <Skill
                             key={skill.id}
                             className={`absolute ${index % 2 === 0 ? 'animate-skill_1' : 'animate-skill_2'}`}
@@ -64,10 +49,8 @@ export default function Skills() {
             </div>
 
             <div className="lg:hidden flex items-center justify-center flex-wrap gap-8">
-                {loading ? (
-                    <Skeleton className="h-4 w-48 mx-auto" />
-                ) : (
-                    (data?.content as SkillData[])?.map((skill) => (
+                {
+                    (data?.skills as SkillData[])?.map((skill) => (
                         <Skill
                             key={skill.id}
                             className={`relative animate-none`}
@@ -76,9 +59,7 @@ export default function Skills() {
 
                         />
                     ))
-                )}
-
-
+                }
 
             </div>
 

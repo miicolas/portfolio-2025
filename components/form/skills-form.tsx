@@ -19,6 +19,7 @@ import { Input } from "@/components/ui/input"
 import UploadFile from "../ui/upload-file"
 import { useState } from "react"
 import { SkillsFormProps } from "@/lib/types";
+import { addSkill } from "@/action/(skills)/add-skill/action"
 
 
 const formSchema = z.object({
@@ -45,32 +46,22 @@ export default function SkillsForm({ setOpen }: SkillsFormProps) {
             logo_url: "",
         },
     });
-    function onSubmit(values: z.infer<typeof formSchema>) {
+
+    async function onSubmit(values: z.infer<typeof formSchema>) {
         const { tech_name, description, logo_url } = values;
 
-        fetch("/api/add-skill", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
+        try {
+            await addSkill({
                 name: tech_name,
-                logo: logo_url,
                 description: description,
-            }),
-        })
-            .then((response) => response.json())
-            .then(() => {
-                toast.success("Skill added successfully");
-                form.reset();
-                setOpen(false);
-
-            })
-            .catch((error) => {
-                console.error("Error adding skill:", error);
-                toast.error("Failed to add skill");
+                logo: logo_url,
             });
-
+            toast.success("Skill added successfully");
+            setOpen(false);
+        } catch (error) {
+            console.error("Error adding skill:", error);
+            toast.error("Failed to add skill");
+        }
     }
 
     const handleUploadComplete = (url: string) => {
