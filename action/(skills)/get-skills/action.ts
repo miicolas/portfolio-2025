@@ -3,7 +3,7 @@
 import { db } from "@/db";
 import { skillsTable } from "@/db/schema";
 
-export async function getProjects() {
+export async function getSkills() {
     try {
         const skills = await db.select().from(skillsTable);
         return { status: "success", skills };
