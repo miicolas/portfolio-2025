@@ -36,6 +36,7 @@ export async function addExperience(body: z.infer<typeof bodySchema>) {
     const plainExperienceData = JSON.parse(JSON.stringify(experience));
 
     revalidatePath("/dashboard/experiences");
+    revalidatePath("/");
     return { status: "success", plainExperienceData }
   } catch (error) {
     console.error("Error adding experience:", error);

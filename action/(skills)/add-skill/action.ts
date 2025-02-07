@@ -25,6 +25,7 @@ export async function addSkill(body: z.infer<typeof bodySchema>) {
             .execute();
 
         revalidatePath("/dashboard/skills");
+        revalidatePath("/");
 
         return { status: "success", skill };
     } catch (error) {
