@@ -126,39 +126,39 @@ export default withUt({
     				}
     			},
     			skill_1: {
-    				'0%': {
-    					transform: 'translate(0, 0) rotate(0deg)'
-    				},
-    				'25%': {
-    					transform: 'translate(50px, 0) rotate(1deg)'
-    				},
-    				'50%': {
-    					transform: 'translate(-50px, 0) rotate(-1deg)'
-    				},
-    				'75%': {
-    					transform: 'translate(50px, 0) rotate(1deg)'
-    				},
-    				'100%': {
-    					transform: 'translate(0, 0) rotate(0deg)'
-    				}
-    			},
+                    '0%': {
+                        transform: 'translate(0, 0) rotate(0deg)'
+                    },
+                    '25%': {
+                        transform: 'translate(20px, 0) rotate(1deg)'
+                    },
+                    '50%': {
+                        transform: 'translate(-20px, 0) rotate(-1deg)'
+                    },
+                    '75%': {
+                        transform: 'translate(20px, 0) rotate(1deg)'
+                    },
+                    '100%': {
+                        transform: 'translate(0, 0) rotate(0deg)'
+                    }
+                },
     			skill_2: {
-    				'0%': {
-    					transform: 'translate(0, 0) rotate(0deg)'
-    				},
-    				'25%': {
-    					transform: 'translate(0, 50px) rotate(1deg)'
-    				},
-    				'50%': {
-    					transform: 'translate(0, -50px) rotate(-1deg)'
-    				},
-    				'75%': {
-    					transform: 'translate(0, 50px) rotate(1deg)'
-    				},
-    				'100%': {
-    					transform: 'translate(0, 0) rotate(0deg)'
-    				}
-    			}
+                    '0%': {
+                        transform: 'translate(0, 0) rotate(0deg)'
+                    },
+                    '25%': {
+                        transform: 'translate(0, 20px) rotate(1deg)'
+                    },
+                    '50%': {
+                        transform: 'translate(0, -20px) rotate(-1deg)'
+                    },
+                    '75%': {
+                        transform: 'translate(0, 20px) rotate(1deg)'
+                    },
+                    '100%': {
+                        transform: 'translate(0, 0) rotate(0deg)'
+                    }
+                }
     		},
     		animation: {
     			letter: 'letter 5s ease-in-out infinite',

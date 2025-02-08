@@ -13,13 +13,13 @@ export default function CardProject({ name, description, image_preview, image_pr
 
 
     return (
-        <Card className="w-full h-[70vh] xl:w-[100vh] bg-neutral-100 rounded-lg p-10 overflow-hidden relative group flex flex-col justify-between">
+        <Card className="w-full min-h-[70vh] xl:w-[100vh] bg-neutral-100 rounded-lg p-10 overflow-hidden relative group flex flex-col justify-between">
             <div className="w-full flex flex-col lg:justify-between">
                 <div className="flex flex-col gap-4">
                     <h1 className="text-4xl lg:text-6xl text-neutral-900 dark:text-neutral-50">{name}</h1>
                     <p className="text-neutral-800 dark:text-neutral-50 text-lg lg:text-2xl text-balance font-light">{description.slice(0, 105)}...</p>
                 </div>
-                <div className="flex gap-2 justify-between items-center">
+                <div className="flex gap-2 justify-between items-center mt-4">
                     <div className="flex gap-2 flex-wrap">
                         {techStackArray.map((tech, index) => (
                             <Badge
@@ -54,7 +54,7 @@ export default function CardProject({ name, description, image_preview, image_pr
                             alt="Project image 1"
                             width={1080}
                             height={1080}
-                            className="rounded-lg h-80 w-auto object-cover"
+                            className="rounded-lg h-56 lg:h-80 w-auto object-cover"
                         />
                     </Card>
                 )}
@@ -67,7 +67,7 @@ export default function CardProject({ name, description, image_preview, image_pr
                             alt="Project image 2"
                             width={1080}
                             height={1080}
-                            className="rounded-lg h-80 w-auto object-cover"
+                            className="rounded-lg h-56 lg:h-80 w-auto object-cover"
                         />
                     </Card>
                 )}
