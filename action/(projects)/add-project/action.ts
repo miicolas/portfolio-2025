@@ -28,6 +28,7 @@ export async function addProject(body: z.infer<typeof bodySchema>) {
             .execute();
 
         revalidatePath("/dashboard/projects");
+        revalidatePath("/projects");
         revalidatePath("/");
 
         return { status: "success", project };
