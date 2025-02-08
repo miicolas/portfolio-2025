@@ -30,7 +30,7 @@ export default function ListProjects({ filterFrameworks, projects }: { filterFra
                                     key={project.id}
                                     className="p-4 w-full group relative"
                                 >
-                                    <h2 className="text-neutral-300 text-8xl group-hover:text-neutral-900 transition-colors duration-300">
+                                    <h2 className="text-neutral-300 text-4xl lg:text-8xl group-hover:text-neutral-900 transition-colors duration-300">
                                         {project.name}
                                     </h2>
                                     <motion.div
