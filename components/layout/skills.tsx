@@ -6,10 +6,10 @@ import { getSkills } from "@/action/(skills)/get-skills/action"
 
 export const Skill = ({ className, logo, name, style }: { className: string, logo: string, name: string, style?: React.CSSProperties }) => {
     return (
-     
+
         <Card className={`p-2 rounded-lg bg-neutral-100 dark:bg-neutral-900 absolute w-fit h-fit ${className} w-16 h-16`} style={style}>
             <Image src={logo} alt={name} width={1200} height={1200} className=" m-auto max-w-full max-h-full object-contain" />
-        </Card> 
+        </Card>
     )
 }
 
@@ -53,7 +53,7 @@ export default async function Skills() {
 
             <div className="lg:hidden flex items-center justify-center flex-wrap gap-8">
                 {
-                    (data?.skills as SkillData[])?.map((skill, index) => (
+                    (data?.skills as SkillData[])?.map((skill) => (
                         <Skill
                             key={skill.id}
                             className={`relative animate-none`}
@@ -63,9 +63,7 @@ export default async function Skills() {
                         />
                     ))
                 }
-
             </div>
-  
         </div>
     );
 }
