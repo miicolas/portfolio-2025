@@ -17,14 +17,14 @@ export default function Hero() {
                         <span
                             className="absolute left-0 -bottom-26 text-7xl lg:text-9xl text-indigo-500 dark:text-neutral-50 font-bloop
                         opacity-100 lg:opacity-0 group-hover:opacity-100 transform -translate-y-2 group-hover:translate-y-0
-                        transition-all duration-[800ms] ease-in-out z-10 group-hover:animate-letter text-balance"
+                        transition-all duration-700 ease-in-out z-10 group-hover:animate-letter text-balance"
                         >
                             {letter === ' ' ? '\u00A0' : letter}
                         </span>
                     </MagneticButton>
                     <span
                         className="inline-block opacity-0 lg:opacity-100 text-neutral-900 dark:text-neutral-50 text-7xl lg:text-9xl font-sans
-                        transition-all duration-[800ms] ease-in-out group-hover:opacity-0 cursor-pointer text-balance font-neueMontreal "
+                        transition-all duration-700 ease-in-out group-hover:opacity-0 cursor-pointer text-balance font-neueMontreal "
                     >
                         {letter === ' ' ? '\u00A0' : letter}
                     </span>
@@ -55,7 +55,7 @@ export default function Hero() {
                     </div>
                     <Link href="#exploration" className="p-4">
                         <MagneticButton>
-                            <div className="flex flex-col items-center justify-center gap-4 text-center border border-neutral-500 rounded-full p-4 lg:p-8 h-fit my-auto text-neutral-900 hover:bg-indigo-500/50 transition-all duration-[1000] ease-in-out animate-bounce hover:animate-none">
+                            <div className="flex flex-col items-center justify-center gap-4 text-center border border-neutral-500 rounded-full p-4 lg:p-8 h-fit my-auto text-neutral-900 hover:bg-indigo-500/50 transition-all duration-1000 ease-in-out animate-bounce hover:animate-none">
                                 <MoveDown size={32} />
                             </div>
                         </MagneticButton>
