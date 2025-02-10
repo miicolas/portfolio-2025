@@ -2,7 +2,7 @@
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
-import { MoreHorizontal, Pencil, Trash2, Eye } from "lucide-react"
+import { MoreHorizontal, Trash2, Eye } from "lucide-react"
 import { toast } from "sonner"
 import { ExperienceData } from "@/lib/types"
 import { formatISODate } from '@/lib/utils'
@@ -12,17 +12,17 @@ import { getExperiences } from "@/action/(experiences)/get-experiences/action"
 export default function ExperiencesTable({ experiences }: { experiences: ExperienceData[] }) {
 
     const handleDelete = async (id: number) => {
-            try {
-                await deleteExperience({ id });
-                toast.success("Project deleted successfully");
-                await getExperiences()
-    
-            }
-            catch (error) {
-                console.error("Error deleting project:", error);
-                toast.error("Failed to delete project");
-            }
-        };
+        try {
+            await deleteExperience({ id });
+            toast.success("Project deleted successfully");
+            await getExperiences()
+
+        }
+        catch (error) {
+            console.error("Error deleting project:", error);
+            toast.error("Failed to delete project");
+        }
+    };
 
     return (
         <div className="rounded-lg border bg-card">
@@ -72,10 +72,6 @@ export default function ExperiencesTable({ experiences }: { experiences: Experie
                                         <DropdownMenuItem>
                                             <Eye className="mr-2 h-4 w-4" />
                                             View Details
-                                        </DropdownMenuItem>
-                                        <DropdownMenuItem>
-                                            <Pencil className="mr-2 h-4 w-4" />
-                                            Edit
                                         </DropdownMenuItem>
                                         <DropdownMenuItem
                                             className="text-red-600"

@@ -1,4 +1,4 @@
-import { Calendar, Home, BicepsFlexed, Search, Settings } from "lucide-react";
+import { Calendar, Home, BicepsFlexed } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -33,16 +33,6 @@ const items = [
     url: "/dashboard/experiences",
     icon: Calendar,
   },
-  {
-    title: "Search",
-    url: "#",
-    icon: Search,
-  },
-  {
-    title: "Settings",
-    url: "#",
-    icon: Settings,
-  },
 ];
 
 export async function AppSidebar() {
@@ -71,7 +61,7 @@ export async function AppSidebar() {
       <SidebarFooter>
         <Logout />
       </SidebarFooter>
-      
+
     </Sidebar>
   );
 }

@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 import { Button } from "@/components/ui/button"
-import { MoreHorizontal, Pencil, Trash2, Eye } from "lucide-react"
+import { MoreHorizontal, Trash2, Eye } from "lucide-react"
 import { toast } from "sonner"
 import { ProjectData } from "@/lib/types"
 import { deleteProject } from "@/action/(projects)/delete-project/action"
@@ -75,10 +75,6 @@ export default function ProjectsTable({ projects }: { projects: ProjectData[] })
                                         <DropdownMenuItem>
                                             <Eye className="mr-2 h-4 w-4" />
                                             View Details
-                                        </DropdownMenuItem>
-                                        <DropdownMenuItem>
-                                            <Pencil className="mr-2 h-4 w-4" />
-                                            Edit Project
                                         </DropdownMenuItem>
                                         <DropdownMenuItem className="text-red-600" onClick={() => handleDelete(project.id)}>
                                             <Trash2 className="mr-2 h-4 w-4" />

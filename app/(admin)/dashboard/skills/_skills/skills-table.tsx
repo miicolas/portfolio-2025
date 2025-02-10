@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 import { Button } from "@/components/ui/button"
-import { MoreHorizontal, Pencil, Trash2, Eye } from "lucide-react"
+import { MoreHorizontal, Trash2, Eye } from "lucide-react"
 import { toast } from "sonner"
 import Image from 'next/image';
 import { SkillData } from '@/lib/types';
@@ -96,10 +96,6 @@ export default function SkillsTable({ skills }: { skills: SkillData[] }) {
                                         <DropdownMenuItem>
                                             <Eye className="mr-2 h-4 w-4" />
                                             View Details
-                                        </DropdownMenuItem>
-                                        <DropdownMenuItem>
-                                            <Pencil className="mr-2 h-4 w-4" />
-                                            Edit Skill
                                         </DropdownMenuItem>
                                         <DropdownMenuItem className="text-red-600" onClick={() => handleDelete(skill.id)}>
                                             <Trash2 className="mr-2 h-4 w-4" />
