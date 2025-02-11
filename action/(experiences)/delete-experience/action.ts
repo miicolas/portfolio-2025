@@ -11,10 +11,12 @@ const bodySchema = z.object({
   id: z.number(),
 });
 
-export async function deleteExperience(body: z.infer<typeof bodySchema>) {
-  try {
+type BodySchema = z.infer<typeof bodySchema>;
 
-    const { id } = body;
+export async function deleteExperience(body: BodySchema): Promise<{ status: string; message: string; experience?: any }> {
+  try {
+    const validatedBody = bodySchema.parse(body);
+    const { id } = validatedBody;
 
     const checkIfExperienceExists = await db
       .select()
@@ -23,8 +25,8 @@ export async function deleteExperience(body: z.infer<typeof bodySchema>) {
 
     if (checkIfExperienceExists.length === 0) {
       return {
+        status: "error",
         message: "Experience not found",
-        error: "Experience not found"
       };
     }
 
@@ -32,8 +34,8 @@ export async function deleteExperience(body: z.infer<typeof bodySchema>) {
       await deleteImage(checkIfExperienceExists[0].logo);
     } catch {
       return {
+        status: "error",
         message: "Failed to delete image",
-        error: "Failed to delete image"
       };
     }
 
@@ -43,10 +45,10 @@ export async function deleteExperience(body: z.infer<typeof bodySchema>) {
 
     revalidatePath("/dashboard/experiences");
     return {
+      status: "success",
       message: "Experience deleted successfully",
-      experience
+      experience,
     };
-
   } catch (error) {
     console.error("Error deleting experience:", error);
     return { status: "error", message: "Failed to delete experience" };

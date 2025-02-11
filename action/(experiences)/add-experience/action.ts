@@ -4,7 +4,6 @@ import { db } from "@/db";
 import { experienceTable } from "@/db/schema";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
-import exp from "constants";
 
 
 const bodySchema = z.object({
@@ -19,7 +18,10 @@ const bodySchema = z.object({
   logo: z.string().url("Invalid logo URL"),
 });
 
-export async function addExperience(body: z.infer<typeof bodySchema>) {
+
+type BodySchema = z.infer<typeof bodySchema>;
+
+export async function addExperience(body: BodySchema): Promise<{ status: string; plainExperienceData?: any; message?: string }> {
   try {
     const validatedBody = bodySchema.parse(body);
 
