@@ -4,6 +4,8 @@ import { db } from "@/db";
 import { skillsTable } from "@/db/schema";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
+import { FormResponse } from "@/lib/types";
+
 
 const bodySchema = z.object({
     name: z.string().min(1),
@@ -12,11 +14,11 @@ const bodySchema = z.object({
 });
 
 
-export async function addSkill(body: z.infer<typeof bodySchema>) {
+export async function addSkill(body: z.infer<typeof bodySchema>): Promise<FormResponse> {
     try {
         const validatedBody = bodySchema.parse(body);
 
-        if (!validatedBody.name || !validatedBody.description || !validatedBody.logo) { 
+        if (!validatedBody.name || !validatedBody.description || !validatedBody.logo) {
             return { status: "error", message: "Missing required fields" };
         }
 
@@ -27,7 +29,7 @@ export async function addSkill(body: z.infer<typeof bodySchema>) {
         revalidatePath("/dashboard/skills");
         revalidatePath("/");
 
-        return { status: "success", skill };
+        return { status: "success", content: skill, message: "Skill created successfully" };
     } catch (error) {
         if (error instanceof z.ZodError) {
             return { status: "error", message: "Invalid data format" };

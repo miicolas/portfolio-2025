@@ -19,7 +19,7 @@ export default async function Exploration() {
 
             <div className="hidden lg:block">
                 <HorizontalScoll itemCount={3}>
-                    {(data?.projects as ProjectData[])?.filter((project: ProjectData) => project.image_preview !== null).slice(0, 3).map((project: ProjectData) => (
+                    {(data?.content as ProjectData[])?.filter((project: ProjectData) => project.image_preview !== null).slice(0, 3).map((project: ProjectData) => (
                         <CardProject
                             key={project.id}
                             id={project.id}
@@ -48,7 +48,7 @@ export default async function Exploration() {
             </div>
 
             <div className="lg:hidden space-y-16 mt-16">
-                {(data?.projects as ProjectData[])?.filter((project: ProjectData) => project.image_preview !== null).slice(0, 3).map((project: ProjectData) => (
+                {(data?.content as ProjectData[])?.filter((project: ProjectData) => project.image_preview !== null).slice(0, 3).map((project: ProjectData) => (
                     <CardProject
                         key={project.id}
                         id={project.id}

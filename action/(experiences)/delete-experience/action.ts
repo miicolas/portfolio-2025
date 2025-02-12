@@ -6,6 +6,7 @@ import { eq } from "drizzle-orm";
 import { deleteImage } from "@/lib/utils";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
+import { FormResponse } from "@/lib/types";
 
 const bodySchema = z.object({
   id: z.number(),
@@ -13,7 +14,7 @@ const bodySchema = z.object({
 
 type BodySchema = z.infer<typeof bodySchema>;
 
-export async function deleteExperience(body: BodySchema): Promise<{ status: string; message: string; experience?: any }> {
+export async function deleteExperience(body: BodySchema): Promise<FormResponse> {
   try {
     const validatedBody = bodySchema.parse(body);
     const { id } = validatedBody;
@@ -47,7 +48,7 @@ export async function deleteExperience(body: BodySchema): Promise<{ status: stri
     return {
       status: "success",
       message: "Experience deleted successfully",
-      experience,
+      content:experience,
     };
   } catch (error) {
     console.error("Error deleting experience:", error);

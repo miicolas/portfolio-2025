@@ -11,7 +11,7 @@ export default async function Skills() {
         <div className="w-full mt-10 flex flex-col gap-4">
             <h1 className="text-center text-3xl font-bold">Skills</h1>
             <SkillsDialogButton />
-            <SkillsTable skills = {data?.skills as SkillData[]} />
+            <SkillsTable skills = {data?.content as SkillData[]} />
         </div>
     );
 }

@@ -39,7 +39,7 @@ export default async function Skills() {
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1/2 h-32 lg:h-16 opacity-40 blur-[50px] bg-indigo-500 rounded-full">
                 </div>
                 <div className="hidden lg:block">
-                    {(data?.skills as SkillData[])?.map((skill, index) => (
+                    {(data?.content as SkillData[])?.map((skill, index) => (
                         <Skill
                             key={skill.id}
                             className={`absolute ${index % 2 === 0 ? 'animate-skill_1' : 'animate-skill_2'}`}
@@ -53,7 +53,7 @@ export default async function Skills() {
 
             <div className="lg:hidden flex items-center justify-center flex-wrap gap-8">
                 {
-                    (data?.skills as SkillData[])?.map((skill) => (
+                    (data?.content as SkillData[])?.map((skill) => (
                         <Skill
                             key={skill.id}
                             className={`relative animate-none`}

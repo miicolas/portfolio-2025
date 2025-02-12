@@ -1,3 +1,5 @@
+import { z, ZodIssue } from "zod";
+
 export interface LogoData {
     src: string;
     alt: string;
@@ -64,3 +66,10 @@ export interface Store {
 export interface SkillsFormProps {
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
+export type FormResponse = {
+    status: "success" | "error";
+    errors?: ZodIssue[];
+    message?: string;
+    content?: any;
+};

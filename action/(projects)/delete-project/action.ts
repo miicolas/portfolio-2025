@@ -6,13 +6,14 @@ import { eq } from "drizzle-orm";
 import { deleteImage } from "@/lib/utils";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
+import { FormResponse } from "@/lib/types";
 
 
 const bodySchema = z.object({
     id: z.number(),
 });
 
-export async function deleteProject(body: z.infer<typeof bodySchema>) {
+export async function deleteProject(body: z.infer<typeof bodySchema>): Promise<FormResponse> {
     try {
         const validatedBody = bodySchema.parse(body);
         const id = validatedBody.id;

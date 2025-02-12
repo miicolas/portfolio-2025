@@ -4,6 +4,7 @@ import { db } from "@/db";
 import { projectsTable } from "@/db/schema";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
+import { FormResponse } from "@/lib/types";
 
 const bodySchema = z.object({
     name: z.string().min(1),
@@ -15,7 +16,7 @@ const bodySchema = z.object({
     tech_stack: z.string().optional(),
 });
 
-export async function addProject(body: z.infer<typeof bodySchema>) {
+export async function addProject(body: z.infer<typeof bodySchema>): Promise<FormResponse> {
     try {
         const validatedBody = bodySchema.parse(body);
 
@@ -31,7 +32,7 @@ export async function addProject(body: z.infer<typeof bodySchema>) {
         revalidatePath("/projects");
         revalidatePath("/");
 
-        return { status: "success", project };
+        return { status: "success", content: project, message: "Project created successfully" };
     } catch (error) {
         if (error instanceof z.ZodError) {
             return { status: "error", message: "Invalid data format" };

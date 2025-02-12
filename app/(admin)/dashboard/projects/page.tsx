@@ -11,7 +11,7 @@ export default async function Projects() {
         <div className="w-full mt-10 flex flex-col gap-4">
             <h1 className="text-center text-3xl font-bold">Projects</h1>
             <ProjectsButton />
-            <ProjectsTable projects={data.projects as ProjectData[]} />
+            <ProjectsTable projects={data.content as ProjectData[]} />
         </div>
     );
 }

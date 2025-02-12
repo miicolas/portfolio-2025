@@ -3,12 +3,12 @@
 import { db } from '@/db';
 import { projectsTable } from '@/db/schema';
 import { eq } from 'drizzle-orm';
-import { ProjectData } from '@/lib/types';
+import { FormResponse, ProjectData } from '@/lib/types';
 
-export default async function getProjectById(id: string): Promise<ProjectData | Response> {
+export default async function getProjectById(id: string): Promise<FormResponse> {
     try {
         if (!id) {
-            return new Response('ID is required', { status: 400 });
+            return { status: 'error', message: 'ID is required' };
         }
 
         const project = await db
@@ -19,13 +19,13 @@ export default async function getProjectById(id: string): Promise<ProjectData | 
             .then(res => res[0]);
 
         if (!project) {
-            return new Response('Project not found', { status: 404 });
+            return { status: 'error', message: 'Project not found' };
         }
 
-        return project as ProjectData;
+        return { status: 'success', content: project, message: 'Project fetched successfully' };
 
     } catch (error) {
         console.error('Error fetching project:', error);
-        return new Response('Internal Server Error', { status: 500 });
+        return { status: 'error', content: null, message: 'Internal Server Error' };
     }
 }

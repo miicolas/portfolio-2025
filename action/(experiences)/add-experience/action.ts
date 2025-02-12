@@ -4,6 +4,7 @@ import { db } from "@/db";
 import { experienceTable } from "@/db/schema";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
+import { FormResponse } from "@/lib/types";
 
 
 const bodySchema = z.object({
@@ -21,7 +22,7 @@ const bodySchema = z.object({
 
 type BodySchema = z.infer<typeof bodySchema>;
 
-export async function addExperience(body: BodySchema): Promise<{ status: string; plainExperienceData?: any; message?: string }> {
+export async function addExperience(body: BodySchema): Promise<FormResponse> {
   try {
     const validatedBody = bodySchema.parse(body);
 
@@ -39,7 +40,7 @@ export async function addExperience(body: BodySchema): Promise<{ status: string;
 
     revalidatePath("/dashboard/experiences");
     revalidatePath("/");
-    return { status: "success", plainExperienceData }
+    return { status: "success", content: plainExperienceData }
   } catch (error) {
     console.error("Error adding experience:", error);
     return { status: "error", message: "Failed to add experience" };

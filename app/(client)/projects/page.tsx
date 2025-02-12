@@ -22,7 +22,7 @@ export default async function Projects() {
     <Suspense fallback={<div>Loading projects...</div>}>
       <FilterListProjects
         frameworksList={frameworksList}
-        projects={data.projects as ProjectData[]}
+        projects={data.content as ProjectData[]}
       />
     </Suspense>
   );
