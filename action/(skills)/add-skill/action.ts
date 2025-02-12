@@ -16,14 +16,16 @@ const bodySchema = z.object({
 
 export async function addSkill(body: z.infer<typeof bodySchema>): Promise<FormResponse> {
     try {
-        const validatedBody = bodySchema.parse(body);
+        const validatedBody = bodySchema.safeParse(body);
 
-        if (!validatedBody.name || !validatedBody.description || !validatedBody.logo) {
-            return { status: "error", message: "Missing required fields" };
+        if (!validatedBody.success) {
+            return { status: "error", errors: validatedBody.error.issues };
         }
 
+        
+
         const skill = await db.insert(skillsTable)
-            .values(validatedBody).$returningId()
+            .values(validatedBody.data).$returningId()
             .execute();
 
         revalidatePath("/dashboard/skills");

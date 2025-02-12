@@ -24,9 +24,14 @@ type BodySchema = z.infer<typeof bodySchema>;
 
 export async function addExperience(body: BodySchema): Promise<FormResponse> {
   try {
-    const validatedBody = bodySchema.parse(body);
+    const validatedBody = bodySchema.safeParse(body);
 
-    const { company, position, startDate, endDate, logo } = validatedBody;
+    if (!validatedBody.success) {
+      return { status: "error", errors: validatedBody.error.issues };
+    }
+
+
+    const { company, position, startDate, endDate, logo } = validatedBody.data;
 
     const experience = await db.insert(experienceTable).values({
       company,

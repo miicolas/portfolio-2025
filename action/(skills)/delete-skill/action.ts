@@ -15,8 +15,11 @@ const bodySchema = z.object({
 
 export async function deleteSkill(body: z.infer<typeof bodySchema>): Promise<FormResponse> {
     try {
-        const validatedBody = bodySchema.parse(body);
-        const id = validatedBody.id;
+        const validatedBody = bodySchema.safeParse(body);
+        if (!validatedBody.success) {
+            return { status: "error", message: "Invalid request body" };
+        }
+        const id = validatedBody.data.id;
 
         const skill = await db
             .select()

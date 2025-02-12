@@ -1,4 +1,4 @@
-import { z, ZodIssue } from "zod";
+import { ZodIssue } from "zod";
 
 export interface LogoData {
     src: string;

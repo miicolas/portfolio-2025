@@ -2,7 +2,7 @@
 
 import { db } from "@/db";
 import { experienceTable } from "@/db/schema";
-import { ExperienceData, FormResponse } from "@/lib/types";
+import { FormResponse } from "@/lib/types";
 
 export async function getExperiences(): Promise<FormResponse> {
     try {

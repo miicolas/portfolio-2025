@@ -16,8 +16,12 @@ type BodySchema = z.infer<typeof bodySchema>;
 
 export async function deleteExperience(body: BodySchema): Promise<FormResponse> {
   try {
-    const validatedBody = bodySchema.parse(body);
-    const { id } = validatedBody;
+    const validatedBody = bodySchema.safeParse(body);
+
+    if (!validatedBody.success) {
+      return { status: "error", errors: validatedBody.error.issues };
+    }
+    const { id } = validatedBody.data;
 
     const checkIfExperienceExists = await db
       .select()

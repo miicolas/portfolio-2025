@@ -18,14 +18,14 @@ const bodySchema = z.object({
 
 export async function addProject(body: z.infer<typeof bodySchema>): Promise<FormResponse> {
     try {
-        const validatedBody = bodySchema.parse(body);
+        const validatedBody = bodySchema.safeParse(body);
 
-        if (!validatedBody.name || !validatedBody.description) {
-            return { status: "error", message: "Missing required fields" };
+        if (!validatedBody.success) {
+            return { status: "error", errors: validatedBody.error.issues };
         }
 
         const project = await db.insert(projectsTable)
-            .values(validatedBody).$returningId()
+            .values(validatedBody.data).$returningId()
             .execute();
 
         revalidatePath("/dashboard/projects");

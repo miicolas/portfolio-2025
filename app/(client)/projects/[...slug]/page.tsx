@@ -12,7 +12,7 @@ type PageProps = Promise<{ slug: string[] }>;
 export default async function ProjectPage(props: { params: PageProps }) {
   const { slug } = await props.params;
   const projectId = slug[1];
-  const project = await getProjectById(projectId);
+  const project = await getProjectById({ id: Number(projectId) });
 
   if (!project || project instanceof Response) {
     return (
@@ -22,7 +22,7 @@ export default async function ProjectPage(props: { params: PageProps }) {
     );
   }
 
-  const techStackArray = project.tech_stack ? project.tech_stack.split(",").map(t => t.trim()) : [];
+  const techStackArray = project.content.tech_stack ? project.content.tech_stack.split(",").map((t: string) => t.trim()) : [];
 
   return (
     <div className="mx-auto px-4 py-8">
@@ -33,19 +33,19 @@ export default async function ProjectPage(props: { params: PageProps }) {
               <ArrowLeft className="h-6 w-6 text-neutral-500" />
             </Link>
 
-            <h1 className="text-3xl font-bold">{project.name}</h1>
+            <h1 className="text-3xl font-bold">{project.content.name}</h1>
           </div>
           <div className="flex gap-2">
-            {project.github && (
+            {project.content.github && (
               <Button asChild variant="outline" size="sm">
-                <a href={project.github} target="_blank" rel="noopener noreferrer">
+                <a href={project.content.github} target="_blank" rel="noopener noreferrer">
                   <Github className="mr-2 h-4 w-4" /> GitHub
                 </a>
               </Button>
             )}
-            {project.link && (
+            {project.content.link && (
               <Button asChild size="sm">
-                <a href={project.link} target="_blank" rel="noopener noreferrer">
+                <a href={project.content.link} target="_blank" rel="noopener noreferrer">
                   <ExternalLink className="mr-2 h-4 w-4" /> Live Project
                 </a>
               </Button>
@@ -57,26 +57,26 @@ export default async function ProjectPage(props: { params: PageProps }) {
         <div className="grid md:grid-cols-2 gap-8">
           <div>
             <h2 className="text-xl font-semibold mb-4">Description</h2>
-            <p className="text-muted-foreground">{project.description}</p>
+            <p className="text-muted-foreground">{project.content.description}</p>
             <div className="flex flex-wrap gap-2 mt-4">
-              {techStackArray.map((tech, index) => (
+                {techStackArray.map((tech: string, index: number) => (
                 <Badge
                 key={index}
                 variant="secondary"
                 className="text-xs font-neueMontreal font-light border border-neutral-200 dark:border-neutral-800"
-            >
+              >
                 {tech}
-            </Badge>
-              ))}
+              </Badge>
+                ))}
             </div>
           </div>
 
           <div className="md:sticky md:top-16 self-start space-y-6">
-            {project.image_preview && project.image_preview !== "" && (
+            {project.content.image_preview && project.content.image_preview !== "" && (
               <div className="rounded-lg overflow-hidden shadow-lg">
                 <Image
-                  src={project.image_preview}
-                  alt={`${project.name} preview`}
+                  src={project.content.image_preview}
+                  alt={`${project.content.name} preview`}
                   width={500}
                   height={300}
                   className="w-full object-cover"
@@ -84,11 +84,11 @@ export default async function ProjectPage(props: { params: PageProps }) {
               </div>
             )}
 
-            {project.image_preview_secondary && project.image_preview_secondary !== "" && (
+            {project.content.image_preview_secondary && project.content.image_preview_secondary !== "" && (
               <div className="rounded-lg overflow-hidden shadow-lg">
                 <Image
-                  src={project.image_preview_secondary}
-                  alt={`${project.name} secondary preview`}
+                  src={project.content.image_preview_secondary}
+                  alt={`${project.content.name} secondary preview`}
                   width={500}
                   height={300}
                   className="w-full object-cover"

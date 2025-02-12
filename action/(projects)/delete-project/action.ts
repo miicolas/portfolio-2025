@@ -15,8 +15,12 @@ const bodySchema = z.object({
 
 export async function deleteProject(body: z.infer<typeof bodySchema>): Promise<FormResponse> {
     try {
-        const validatedBody = bodySchema.parse(body);
-        const id = validatedBody.id;
+        const validatedBody = bodySchema.safeParse(body);
+
+        if (!validatedBody.success) {
+            return { status: "error", errors: validatedBody.error.issues };
+        }
+        const id = validatedBody.data.id;
 
         const project = await db
             .select()

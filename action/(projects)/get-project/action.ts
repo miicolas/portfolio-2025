@@ -3,18 +3,27 @@
 import { db } from '@/db';
 import { projectsTable } from '@/db/schema';
 import { eq } from 'drizzle-orm';
-import { FormResponse, ProjectData } from '@/lib/types';
+import { FormResponse } from '@/lib/types';
+import { z } from 'zod';
 
-export default async function getProjectById(id: string): Promise<FormResponse> {
+const bodySchema = z.object({
+    id: z.number(),
+});
+
+export default async function getProjectById(body: z.infer<typeof bodySchema>): Promise<FormResponse> {
+
     try {
-        if (!id) {
-            return { status: 'error', message: 'ID is required' };
+        const validatedBody = bodySchema.safeParse(body);
+        if (!validatedBody.success) {
+            return { status: 'error', errors: validatedBody.error.issues };
         }
+
+        const id = validatedBody.data.id;
 
         const project = await db
             .select()
             .from(projectsTable)
-            .where(eq(projectsTable.id, Number(id)))
+            .where(eq(projectsTable.id, id))
             .execute()
             .then(res => res[0]);
 
