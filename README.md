@@ -14,11 +14,15 @@ git clone https://github.com/miicolas/portfolio-2025.git
 ```
 2. Install dependencies
 ```bash
-npm install
+pnpm install
 ```
-3. Start the development server
+3. Install Migration
 ```bash
-npm run dev
+pnpp dlx drizzle-kit push
+```
+4. Start the development server
+```bash
+pnpm run dev
 ```
 
 ## 🛠️ Built With
